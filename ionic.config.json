@@ -1,0 +1,7 @@
+{
+  "name": "split-wise-app-frontend",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "custom"
+}

@@ -1,0 +1,198 @@
+// #region ---- Core Imports ----
+import React from 'react';
+
+// #endregion
+
+// #region ---- Packages Imports ----
+
+// #endregion
+
+// #region ---- Custom Imports ----
+import {
+  ZRUBox,
+  ZRUButton,
+  ZRUCheckbox,
+  ZRUFlex,
+  ZRUHeading,
+  ZRUSelect,
+  ZRUText
+} from '@/components/RadixUI';
+
+// #endregion
+
+// #region ---- Types Imports ----
+import {
+  ZRUAlignE,
+  ZRUColorE,
+  ZRUHeadingAsE,
+  ZRUJustifyE,
+  ZRUOrientationE,
+  ZRUSelectContentPositionE,
+  ZRUTextAsE
+} from '@/types/radixUI/index.type';
+
+// #endregion
+
+// #region ---- Store Imports ----
+
+// #endregion
+
+// #region ---- Images Imports ----
+import {
+  ZAddCircleOutlineIcon,
+  ZReceiptOutlineIcon,
+  ZScaleBalancedIcon,
+  ZSendOutlineIcon
+} from '@/assets';
+import ZPagination from '@/components/Elements/ZPagination';
+
+// #endregion
+
+const GroupView: React.FC = () => {
+  return (
+    <>
+      <ZRUFlex
+        className='px-1 py-2'
+        align={ZRUAlignE.center}
+        justify={ZRUJustifyE.between}
+        width='100%'
+      >
+        <ZRUHeading
+          className='text-3xl font-medium'
+          as={ZRUHeadingAsE.h2}
+          color={ZRUColorE.grass}
+        >
+          Group
+        </ZRUHeading>
+        <ZRUFlex
+          className='gap-2'
+          align={ZRUAlignE.center}
+          justify={ZRUJustifyE.end}
+        >
+          <ZRUButton size='3' color={ZRUColorE.violet} className='!gap-1'>
+            <ZAddCircleOutlineIcon className='w-5 h-5' /> Add an Expense
+          </ZRUButton>
+
+          <ZRUButton size='3' color={ZRUColorE.indigo} className='!gap-2'>
+            <ZReceiptOutlineIcon className='w-5 h-5' /> Settle Up
+          </ZRUButton>
+        </ZRUFlex>
+      </ZRUFlex>
+
+      <ZRUBox className='w-full px-1 mt-5'>
+        {/* Table */}
+        <ZRUBox className='w-full'>
+          {/* Header */}
+          <ZRUBox className='*:flex *:item-center flex w-full items-center ps-1 pe-2 *:px-2 *:py-3 *:flex-1 bg-secondary/40 font-medium rounded-md text-tertiary shadow-sm'>
+            <ZRUBox className='!flex-initial w-max me-2'>
+              <ZRUCheckbox />
+            </ZRUBox>
+            <ZRUBox>Expense</ZRUBox>
+            <ZRUBox>Paid by</ZRUBox>
+            <ZRUBox>Amount</ZRUBox>
+            <ZRUBox>Lent you</ZRUBox>
+            <ZRUBox>Date</ZRUBox>
+            <ZRUBox className='!flex-initial w-max'>Actions</ZRUBox>
+          </ZRUBox>
+
+          {/* Body */}
+          <ZRUBox className='mt-4 overflow-hidden rounded-md *:flex *:w-full *:items-center *:ps-1 *:pe-2 *:font-normal *:text-tertiary *:*:flex *:*:item-center *:*:px-2 *:*:py-2 *:*:flex-1'>
+            <ZRUBox className='bg-medium/20'>
+              <ZRUBox className='!flex-initial w-max me-2'>
+                <ZRUCheckbox />
+              </ZRUBox>
+              <ZRUBox>Expense</ZRUBox>
+              <ZRUBox>Paid by</ZRUBox>
+              <ZRUBox>Amount</ZRUBox>
+              <ZRUBox>Lent you</ZRUBox>
+              <ZRUBox>Date</ZRUBox>
+              <ZRUBox className='!flex-initial w-max'>Actions</ZRUBox>
+            </ZRUBox>
+
+            <ZRUBox className='bg-tertiary/20'>
+              <ZRUBox className='!flex-initial w-max me-2'>
+                <ZRUCheckbox />
+              </ZRUBox>
+              <ZRUBox>Expense</ZRUBox>
+              <ZRUBox>Paid by</ZRUBox>
+              <ZRUBox>Amount</ZRUBox>
+              <ZRUBox>Lent you</ZRUBox>
+              <ZRUBox>Date</ZRUBox>
+              <ZRUBox className='!flex-initial w-max'>Actions</ZRUBox>
+            </ZRUBox>
+
+            <ZRUBox className='bg-medium/20'>
+              <ZRUBox className='!flex-initial w-max me-2'>
+                <ZRUCheckbox />
+              </ZRUBox>
+              <ZRUBox>Expense</ZRUBox>
+              <ZRUBox>Paid by</ZRUBox>
+              <ZRUBox>Amount</ZRUBox>
+              <ZRUBox>Lent you</ZRUBox>
+              <ZRUBox>Date</ZRUBox>
+              <ZRUBox className='!flex-initial w-max'>Actions</ZRUBox>
+            </ZRUBox>
+          </ZRUBox>
+
+          {/* footer */}
+          <ZRUBox className='flex items-center justify-between w-full mt-4 text-tertiary'>
+            <ZRUBox>
+              <ZRUSelect
+                label='Row per page'
+                labelClassName='font-medium text-sm'
+                labelOrientation={ZRUOrientationE.horizontal}
+                options={[
+                  { label: '10', value: '10' },
+                  { label: '20', value: '20' },
+                  { label: '30', value: '30' }
+                ]}
+                content={{
+                  position: ZRUSelectContentPositionE.popper
+                }}
+                defaultValue='10'
+              />
+            </ZRUBox>
+            <ZRUFlex align={ZRUAlignE.center} justify={ZRUJustifyE.end}>
+              <ZPagination
+                paginationItems={[1, 2, 3, '...', 8, 9, 10]}
+                currentPage={2}
+              />
+            </ZRUFlex>
+          </ZRUBox>
+        </ZRUBox>
+      </ZRUBox>
+
+      <ZRUFlex
+        className='px-1 py-2 mt-8'
+        align={ZRUAlignE.center}
+        justify={ZRUJustifyE.between}
+        width='100%'
+      >
+        <ZRUHeading
+          className='text-3xl font-medium'
+          as={ZRUHeadingAsE.h2}
+          color={ZRUColorE.grass}
+        >
+          Member
+        </ZRUHeading>
+        <ZRUFlex
+          className='gap-2'
+          align={ZRUAlignE.center}
+          justify={ZRUJustifyE.end}
+        >
+          <ZRUButton size='3' color={ZRUColorE.violet} className='!gap-2'>
+            <ZSendOutlineIcon className='w-5 h-5' /> Invite a Member
+          </ZRUButton>
+
+          <ZRUButton size='3' color={ZRUColorE.indigo} className='!gap-2'>
+            <ZReceiptOutlineIcon className='w-5 h-5' /> Settle Up
+          </ZRUButton>
+        </ZRUFlex>
+      </ZRUFlex>
+
+      <ZRUBox className='w-full px-1 mt-5'></ZRUBox>
+    </>
+  );
+};
+
+export default GroupView;
