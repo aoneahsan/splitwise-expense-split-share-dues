@@ -62,14 +62,15 @@ interface ZRUSelectI {
 
   options?: Array<ZRUSelectValueI>;
   labelOrientation?: ZRUOrientationE;
+  triggerClassName?: string;
 }
 // #endregion
 
 const ZRUSelect: React.FC<ZRUSelectI> = (props) => {
   return (
     <ZRUBox
-      className={ZClassNames({
-        'flex items-center gap-1':
+      className={ZClassNames(props.className, {
+        'flex items-center gap-1 overflow-hidden text-ellipsis':
           props?.labelOrientation === ZRUOrientationE.horizontal
       })}
     >
@@ -105,7 +106,10 @@ const ZRUSelect: React.FC<ZRUSelectI> = (props) => {
         onOpenChange={props.onOpenChange}
         onValueChange={props.onValueChange}
       >
-        <Select.Trigger {...props?.trigger} />
+        <Select.Trigger
+          {...props?.trigger}
+          className={props.triggerClassName}
+        />
 
         <Select.Content {...props?.content}>
           {props?.options?.map((option, index) => {

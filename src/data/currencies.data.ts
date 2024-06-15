@@ -1,6 +1,6 @@
 export const ZCurrenciesData = [
-  // { value: 'Bitcoin', label: 'Bitcoin', symbol: '฿' },
-  // { value: 'Ethereum', label: 'Ethereum', symbol: 'Ξ' },
+  { value: 'Bitcoin', label: 'Bitcoin', symbol: '฿' },
+  { value: 'Ethereum', label: 'Ethereum', symbol: 'Ξ' },
   // { value: 'USDT', label: 'USDT', symbol: 'USDT' },
   // { value: 'USDC', label: 'USDC', symbol: 'USDC' },
   // { value: 'AFN', label: 'Afghan afghani', symbol: '؋' },
@@ -114,7 +114,7 @@ export const ZCurrenciesData = [
   // { value: 'KPW', label: 'North Korean won', symbol: '₩' },
   // { value: 'NOK', label: 'Norwegian krone', symbol: 'kr' },
   // { value: 'OMR', label: 'Omani rial', symbol: 'ر.ع.' },
-  // { value: 'PKR', label: 'Pakistani rupee', symbol: '₨' },
+  { value: 'PKR', label: 'Pakistani rupee', symbol: '₨' },
   // { value: 'PAB', label: 'Panamanian balboa', symbol: 'B/.' },
   // { value: 'PGK', label: 'Papua New Guinean kina', symbol: 'K' },
   // { value: 'PYG', label: 'Paraguayan guaraní', symbol: '₲' },

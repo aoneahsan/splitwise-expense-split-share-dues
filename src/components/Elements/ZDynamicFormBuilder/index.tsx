@@ -1,9 +1,11 @@
 // #region ---- Core Imports ----
+import { ZClassNames } from '@/Packages/ClassNames';
 import { ZRUInput, ZRUInputSlot } from '@/components/RadixUI';
 import { ZRUSideE } from '@/types/radixUI/index.type';
 import { FormFieldType } from '@/utils/enums/index.enum';
 import { isZNonEmptyString, makeWorkCapitalize } from '@/utils/helpers';
 import React, { useCallback, useState } from 'react';
+import ZPrizeInput from '../ZPrizeInput';
 
 // #endregion
 
@@ -61,15 +63,15 @@ export const ZFieldRenderer: React.FC<{
     case FormFieldType.password:
       return (
         <ZRUInput
-          className={className}
+          className={ZClassNames(className)}
           placeholder={placeholder}
           label={isZNonEmptyString(label) ? label : makeWorkCapitalize(type)}
           errorNode={errorNode}
           infoText={infoNode}
           isValid={isValid}
           name={name}
-          labelClassName={labelClassName}
           required={required}
+          labelClassName={ZClassNames(labelClassName)}
           value={
             type === FormFieldType.password
               ? showPassword
@@ -91,6 +93,9 @@ export const ZFieldRenderer: React.FC<{
           ) : null}
         </ZRUInput>
       );
+
+    case FormFieldType.prize:
+      return <ZPrizeInput />;
 
     default:
       break;

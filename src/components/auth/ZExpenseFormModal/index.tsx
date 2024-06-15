@@ -63,7 +63,7 @@ const ZExpenseFormModal: React.FC<{ hideModal: () => void }> = ({
         </ZRUText>
       </ZRUFlex>
       <ZRUBox className='mt-4'>
-        <ZFieldRenderer type={FormFieldType.password} value='123453' />
+        <ZFieldRenderer type={FormFieldType.prize} value='123453' />
       </ZRUBox>
     </ZRUBox>
   );

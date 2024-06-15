@@ -45,6 +45,7 @@ import {
   ZSendOutlineIcon
 } from '@/assets';
 import ZPagination from '@/components/Elements/ZPagination';
+import ZAuthGroupUser from '@/components/auth/ZAuthGroupUser';
 
 // #endregion
 
@@ -190,7 +191,9 @@ const GroupView: React.FC = () => {
         </ZRUFlex>
       </ZRUFlex>
 
-      <ZRUBox className='w-full px-1 mt-5'></ZRUBox>
+      <ZRUBox className='w-full px-1 mt-5'>
+        <ZAuthGroupUser />
+      </ZRUBox>
     </>
   );
 };
