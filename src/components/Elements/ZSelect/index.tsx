@@ -21,6 +21,7 @@ import { ZClassNames } from '@/Packages/ClassNames';
 
 // #region ---- Custom Imports ----
 import { isZNonEmptyString } from '@/utils/helpers';
+import { ZRUBox, ZRUText } from '@/components/RadixUI';
 
 // #endregion
 
@@ -37,13 +38,16 @@ import { isZNonEmptyString } from '@/utils/helpers';
 // #endregion
 
 // #region ---- Types Imports ----
-import { type ZRSelectOptions } from '@/types/elements/Select.type';
+import { type ZRSelectOptions } from '@/types/elements/select.type';
 import { type SelectComponents } from 'react-select/dist/declarations/src/components';
+import { ZRUColorE, ZRUTextAsE } from '@/types/radixUI/index.type';
 type ZSelectI = {
   className?: string;
+  labelClassName?: string;
+  label?: string;
   selectClassName?: string;
   classNamePrefix?: string;
-  label?: string;
+  required?: boolean;
   name?: string;
   placeholder?: React.ReactNode;
   disabled?: boolean;
@@ -59,6 +63,7 @@ type ZSelectI = {
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
   style?: React.CSSProperties;
+  infoText?: React.ReactNode;
   styles?: StylesConfig<ZRSelectOptions, boolean, GroupBase<ZRSelectOptions>>;
   components?: Partial<
     SelectComponents<ZRSelectOptions, boolean, GroupBase<ZRSelectOptions>>
@@ -93,7 +98,7 @@ type ZSelectI = {
 
 // #endregion
 
-export const ZStandardSelect: React.FC<ZSelectI> = ({
+export const ZSelect: React.FC<ZSelectI> = ({
   defaultValue,
   isMulti = false,
   name,
@@ -105,237 +110,92 @@ export const ZStandardSelect: React.FC<ZSelectI> = ({
   options,
   value,
   className,
-  onFocus,
-  onBlur,
-  onChange,
   classNamePrefix,
   styles,
-  components
-}) => {
-  return (
-    <Select
-      styles={styles}
-      defaultValue={defaultValue}
-      isMulti={isMulti}
-      name={name}
-      components={components}
-      placeholder={placeholder}
-      isClearable={isClearable}
-      isDisabled={isDisabled}
-      isRtl={isRtl}
-      isSearchable={isSearchable}
-      options={options}
-      value={value}
-      className={className}
-      classNamePrefix={classNamePrefix}
-      onFocus={onFocus}
-      onBlur={onBlur}
-      onChange={(value, actionMeta: ActionMeta<ZRSelectOptions>) => {
-        if (onChange !== undefined) {
-          const _value = value as ZRSelectOptions & MultiValue<ZRSelectOptions>;
-          onChange(_value, actionMeta);
-        }
-      }}
-    />
-  );
-};
-
-export const ZBtnSelect: React.FC<ZSelectI> = ({
-  defaultValue,
-  isMulti = false,
-  name,
-  placeholder,
-  isClearable,
-  isDisabled,
-  isRtl,
-  isSearchable,
-  options,
-  value,
-  className,
+  components,
+  label,
+  labelClassName,
+  required = false,
+  isValid = true,
+  errorNode,
+  infoText,
+  selectClassName,
   onFocus,
   onBlur,
   onChange
 }) => {
   return (
-    <Select
-      defaultValue={defaultValue}
-      isMulti={isMulti}
-      name={name}
-      placeholder={placeholder}
-      isClearable={isClearable}
-      components={components}
-      isDisabled={isDisabled}
-      isRtl={isRtl}
-      isSearchable={isSearchable}
-      options={options}
-      value={value}
-      className={ZClassNames(className, {
-        'cursor-not-allowed opacity-70': isDisabled
-      })}
-      onFocus={onFocus}
-      onBlur={onBlur}
-      classNamePrefix='z-rs-btn'
-      styles={{
-        control: (baseStyles, state) => ({
-          ...baseStyles,
-          boxShadow: state.isFocused ? 'none !important' : 'none !important'
-        })
-      }}
-      onChange={(value, actionMeta: ActionMeta<ZRSelectOptions>) => {
-        if (onChange !== undefined) {
-          const _value = value as ZRSelectOptions & MultiValue<ZRSelectOptions>;
-          onChange(_value, actionMeta);
-        }
-      }}
-    />
-  );
-};
-
-const DropdownIndicator = (
-  props: DropdownIndicatorProps<
-    ZRSelectOptions,
-    boolean,
-    GroupBase<ZRSelectOptions>
-  >
-): JSX.Element => {
-  return (
-    <components.DropdownIndicator {...props}>
-      <svg
-        xmlns='http://www.w3.org/2000/svg'
-        width='22'
-        height='22'
-        viewBox='0 0 22 22'
-        fill='none'
-      >
-        <path
-          d='M4.81274 7.90222L11.0002 14.0897L17.1877 7.90222'
-          stroke='#3A3653'
-          strokeWidth='2.25'
-          strokeLinecap='round'
-          strokeLinejoin='round'
-        />
-      </svg>
-    </components.DropdownIndicator>
-  );
-};
-
-const ZSelect: React.FC<ZSelectI> = ({
-  className,
-  isMulti,
-  label = 'label',
-  name,
-  placeholder = '',
-  isClearable,
-  isDisabled,
-  isRtl,
-  isSearchable,
-  isValid = true,
-  errorNode,
-  value,
-  defaultValue,
-  selectClassName,
-  style,
-  options,
-  onBlur,
-  onChange,
-  onFocus
-}) => {
-  const [inputState, setInputState] = useState<{
-    value?: PropsValue<ZRSelectOptions>;
-    isFocus: boolean;
-  }>({
-    value,
-    isFocus: false
-  });
-
-  return (
-    <>
-      <div
-        className={ZClassNames(className, {
-          'h-[3.5rem] relative z-input-group': true
-        })}
-        style={style}
-      >
-        <label
-          className={ZClassNames({
-            'absolute -translate-y-1/2 top-[58%] left-4 z-input-label text-[1rem] transition-all pointer-events-none font-medium font-nunito-regular':
-              true,
-            'text-tertiary': isValid,
-            'text-danger': !isValid,
-            'floating-label':
-              inputState?.isFocus || (value !== undefined && value !== null)
-          })}
-        >
+    <ZRUBox className={className}>
+      {isZNonEmptyString(label) ? (
+        <ZRUText as={ZRUTextAsE.label} className={labelClassName}>
           {label}
-        </label>
-        <Select
-          defaultValue={defaultValue}
-          isMulti={isMulti}
-          name={name}
-          placeholder={placeholder}
-          isClearable={isClearable}
-          isDisabled={isDisabled}
-          isRtl={isRtl}
-          isSearchable={isSearchable}
-          options={options}
-          components={{ DropdownIndicator }}
-          value={value}
-          className={ZClassNames(selectClassName, {
-            'z-react-select-container leading-[1.5rem] font-medium tracking-[0.15px] font-nunito-regular text-[1rem] h-full border-b text-tertiary':
-              true,
-            'border-ShadowedPlum': isValid,
-            'border-danger': !isValid
-          })}
-          classNamePrefix='z-react-select'
-          onFocus={(e) => {
-            setInputState((oldValues) => ({
-              ...oldValues,
-              isFocus: true
-            }));
-            if (onFocus !== undefined) {
-              onFocus(e);
-            }
-          }}
-          onBlur={(e) => {
-            setInputState((oldValues) => ({
-              ...oldValues,
-              isFocus: false
-            }));
-            if (onBlur !== undefined) {
-              onBlur(e);
-            }
-          }}
-          onChange={(value, actionMeta: ActionMeta<ZRSelectOptions>) => {
+          {required ? (
+            <ZRUText
+              as={ZRUTextAsE.span}
+              className='ms-1'
+              color={ZRUColorE.tomato}
+            >
+              *
+            </ZRUText>
+          ) : null}
+        </ZRUText>
+      ) : null}
+
+      <Select
+        styles={styles}
+        defaultValue={defaultValue}
+        isMulti={isMulti}
+        name={name}
+        components={components}
+        placeholder={placeholder}
+        isClearable={isClearable}
+        isDisabled={isDisabled}
+        isRtl={isRtl}
+        isSearchable={isSearchable}
+        options={options}
+        value={value}
+        className={selectClassName}
+        classNamePrefix={classNamePrefix}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        onChange={(value, actionMeta: ActionMeta<ZRSelectOptions>) => {
+          if (onChange !== undefined) {
             const _value = value as ZRSelectOptions &
               MultiValue<ZRSelectOptions>;
-            setInputState((oldValues) => ({
-              ...oldValues,
-              value
-            }));
+            onChange(_value, actionMeta);
+          }
+        }}
+      />
 
-            if (onChange !== undefined) {
-              onChange(_value, actionMeta);
-            }
-          }}
-          styles={{
-            control: (baseStyles, state) => ({
-              ...baseStyles,
-              borderColor: state.isFocused
-                ? 'transparent !important'
-                : 'transparent !important',
-              boxShadow: state.isFocused ? 'none !important' : 'none !important'
-            })
-          }}
-        />
-      </div>
-      {!isValid &&
+      {/* Error */}
+      {isValid === false &&
       ((typeof errorNode === 'string' && isZNonEmptyString(errorNode)) ||
         (errorNode !== null && errorNode !== undefined)) ? (
-        <span className='text-[0.75rem] ps-4 leading-[1rem] tracking-[0.4px] font-medium font-nunito-regular'>
+        <ZRUText
+          as={ZRUTextAsE.span}
+          size='1'
+          color={ZRUColorE.tomato}
+          className='font-medium'
+        >
           {errorNode}
-        </span>
+        </ZRUText>
       ) : null}
-    </>
+
+      {/* Info */}
+      {isValid &&
+      ((typeof infoText === 'string' && isZNonEmptyString(infoText)) ||
+        (infoText !== null && infoText !== undefined)) ? (
+        <ZRUText
+          as={ZRUTextAsE.span}
+          size='1'
+          color={ZRUColorE.gold}
+          className='font-medium'
+        >
+          {infoText}
+        </ZRUText>
+      ) : null}
+    </ZRUBox>
   );
 };
+
 export default ZSelect;

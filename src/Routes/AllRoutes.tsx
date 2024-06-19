@@ -103,18 +103,18 @@ export const forgotRoute = createRoute({
 // #region  ----- Auth routes -----
 
 // #region My Account
-const myAccountRoute = createRoute({
-  getParentRoute: () => tanstackRootRoute,
-  path: AppRoutes.myAccount,
-  component: lazyRouteComponent(
-    async (): Promise<Record<string, unknown>> =>
-      await import('@/pages/authenticated/MyAccount')
-  )
-  // beforeLoad: privateRouteHandler
-});
+// const myAccountRoute = createRoute({
+//   getParentRoute: () => tanstackRootRoute,
+//   path: AppRoutes.myAccount,
+//   component: lazyRouteComponent(
+//     async (): Promise<Record<string, unknown>> =>
+//       await import('@/pages/authenticated/MyAccount')
+//   )
+//   // beforeLoad: privateRouteHandler
+// });
 
 /// --- -- Account tree
-export const myAccountTree = myAccountRoute.addChildren([]);
+// export const myAccountTree = myAccountRoute.addChildren([]);
 // #endregion
 
 // #region Auth (Dashboard)
@@ -184,7 +184,7 @@ const friendsRoute = createRoute({
 
 const accountRoute = createRoute({
   getParentRoute: () => authRoute,
-  path: AppRoutes.myAccount,
+  path: AppRoutes.authSub.account.path,
   component: lazyRouteComponent(
     async (): Promise<Record<string, unknown>> =>
       await import('@/pages/authenticated/MyAccount')

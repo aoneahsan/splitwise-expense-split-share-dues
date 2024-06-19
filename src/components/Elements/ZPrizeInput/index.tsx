@@ -1,5 +1,5 @@
 // #region ---- Core Imports ----
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 // #endregion
 
@@ -9,6 +9,7 @@ import React, { useState } from 'react';
 
 // #region ---- Custom Imports ----
 import {
+  ZRUBox,
   ZRUFlex,
   ZRUInput,
   ZRUInputSlot,
@@ -16,49 +17,123 @@ import {
   ZRUText
 } from '@/components/RadixUI';
 import { ZCurrenciesData } from '@/data/currencies.data';
+import { ZClassNames } from '@/Packages/ClassNames';
+import constants from '@/utils/constants';
 
 // #endregion
 
 // #region ---- Types Imports ----
-import { ZRUAlignE } from '@/types/radixUI/index.type';
+import { ZRUAlignE, ZRUColorE, ZRUTextAsE } from '@/types/radixUI/index.type';
+import {
+  type ZPrizeInputOnChange,
+  type ZPrizeInputStateI
+} from '@/types/elements/prize.type';
 
+export interface ZPrizeInputI {
+  onChange?: ZPrizeInputOnChange;
+  value?: ZPrizeInputStateI;
+  className?: string;
+  labelClassName?: string;
+  required?: boolean;
+  isValid?: boolean;
+  errorNode?: React.ReactNode;
+  infoText?: React.ReactNode;
+}
 // #endregion
 
-// #region ---- Store Imports ----
+const ZPrizeInput: React.FC<ZPrizeInputI> = ({
+  onChange,
+  value,
+  className,
+  labelClassName,
+  required = false,
+  isValid = true,
+  errorNode,
+  infoText
+}) => {
+  const [compState, setCompState] = useState<ZPrizeInputStateI>({
+    currency: constants.defaultValues.currency,
+    prize: '0'
+  });
 
-// #endregion
+  const handleCurrencyChange = useCallback(
+    (newValue: string) => {
+      const selectedCurrency = ZCurrenciesData.find(
+        (currency) => currency?.value === newValue
+      );
+      if (selectedCurrency) {
+        const updatedState = {
+          ...compState,
+          currency: selectedCurrency
+        };
+        setCompState(() => updatedState);
+        if (onChange) {
+          onChange(updatedState);
+        }
+      }
+    },
+    [compState, onChange]
+  );
 
-// #region ---- Images Imports ----
+  const handlePrizeChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const updatedState = {
+        ...compState,
+        prize: e?.target?.value
+      };
+      setCompState(() => updatedState);
+      if (onChange) {
+        onChange(updatedState);
+      }
+    },
+    [compState, onChange]
+  );
 
-// #endregion
-
-const ZPrizeInput: React.FC = () => {
-  const [currency, setCurrency] = useState<{
-    value: string;
-    label: string;
-    symbol: string;
-  }>(ZCurrenciesData[0]);
+  useEffect(() => {
+    if (value !== undefined && value !== null) {
+      setCompState(() => ({
+        ...value
+      }));
+    }
+  }, []);
 
   return (
-    <ZRUFlex align={ZRUAlignE.center} gap='2'>
-      <ZRUSelect
-        className='w-20'
-        options={ZCurrenciesData}
-        onValueChange={(value) => {
-          const item = ZCurrenciesData?.find((el) => el.value === value);
-          if (item !== undefined) {
-            setCurrency(() => ({ ...item }));
-          }
-        }}
-        value={currency?.value}
-        triggerClassName='w-full'
-      />
-      <ZRUInput className='flex-1'>
-        <ZRUInputSlot>
-          <ZRUText className='ps-1'>{currency?.symbol}</ZRUText>
-        </ZRUInputSlot>
-      </ZRUInput>
-    </ZRUFlex>
+    <ZRUBox className={ZClassNames(className)}>
+      <ZRUText as={ZRUTextAsE.label} className={ZClassNames(labelClassName)}>
+        Prize
+        {required ? (
+          <ZRUText
+            as={ZRUTextAsE.span}
+            className='ms-1'
+            color={ZRUColorE.tomato}
+          >
+            *
+          </ZRUText>
+        ) : null}
+      </ZRUText>
+      <ZRUFlex align={ZRUAlignE.start} gap='1'>
+        <ZRUSelect
+          size='3'
+          className='w-20'
+          options={ZCurrenciesData}
+          value={compState?.currency?.value}
+          triggerClassName='w-full'
+          onValueChange={handleCurrencyChange}
+        />
+        <ZRUInput
+          size='3'
+          className='flex-1'
+          isValid={isValid}
+          errorNode={errorNode}
+          infoText={infoText}
+          onChange={handlePrizeChange}
+        >
+          <ZRUInputSlot>
+            <ZRUText className='ps-1'>{compState?.currency?.symbol}</ZRUText>
+          </ZRUInputSlot>
+        </ZRUInput>
+      </ZRUFlex>
+    </ZRUBox>
   );
 };
 

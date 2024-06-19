@@ -14,9 +14,15 @@ import {
   ZRUCheckbox,
   ZRUFlex,
   ZRUHeading,
-  ZRUSelect,
-  ZRUText
+  ZRUSelect
 } from '@/components/RadixUI';
+import ZPagination from '@/components/Elements/ZPagination';
+import ZAuthGroupUser from '@/components/auth/ZAuthGroupUser';
+import {
+  ZAddExpenseBtn,
+  ZInviteMemberBtn,
+  ZSettleUpBtn
+} from '@/components/auth/ZBtns';
 
 // #endregion
 
@@ -27,8 +33,7 @@ import {
   ZRUHeadingAsE,
   ZRUJustifyE,
   ZRUOrientationE,
-  ZRUSelectContentPositionE,
-  ZRUTextAsE
+  ZRUSelectContentPositionE
 } from '@/types/radixUI/index.type';
 
 // #endregion
@@ -38,14 +43,7 @@ import {
 // #endregion
 
 // #region ---- Images Imports ----
-import {
-  ZAddCircleOutlineIcon,
-  ZReceiptOutlineIcon,
-  ZScaleBalancedIcon,
-  ZSendOutlineIcon
-} from '@/assets';
-import ZPagination from '@/components/Elements/ZPagination';
-import ZAuthGroupUser from '@/components/auth/ZAuthGroupUser';
+import { ZSendOutlineIcon } from '@/assets';
 
 // #endregion
 
@@ -70,13 +68,9 @@ const GroupView: React.FC = () => {
           align={ZRUAlignE.center}
           justify={ZRUJustifyE.end}
         >
-          <ZRUButton size='3' color={ZRUColorE.violet} className='!gap-1'>
-            <ZAddCircleOutlineIcon className='w-5 h-5' /> Add an Expense
-          </ZRUButton>
+          <ZAddExpenseBtn />
 
-          <ZRUButton size='3' color={ZRUColorE.indigo} className='!gap-2'>
-            <ZReceiptOutlineIcon className='w-5 h-5' /> Settle Up
-          </ZRUButton>
+          <ZSettleUpBtn />
         </ZRUFlex>
       </ZRUFlex>
 
@@ -181,13 +175,9 @@ const GroupView: React.FC = () => {
           align={ZRUAlignE.center}
           justify={ZRUJustifyE.end}
         >
-          <ZRUButton size='3' color={ZRUColorE.violet} className='!gap-2'>
-            <ZSendOutlineIcon className='w-5 h-5' /> Invite a Member
-          </ZRUButton>
+          <ZInviteMemberBtn />
 
-          <ZRUButton size='3' color={ZRUColorE.indigo} className='!gap-2'>
-            <ZReceiptOutlineIcon className='w-5 h-5' /> Settle Up
-          </ZRUButton>
+          <ZSettleUpBtn />
         </ZRUFlex>
       </ZRUFlex>
 

@@ -10,12 +10,13 @@ import React from 'react';
 // #region ---- Custom Imports ----
 import {
   ZRUBox,
-  ZRUButton,
   ZRUCheckbox,
   ZRUFlex,
   ZRUHeading,
   ZRUSelect
 } from '@/components/RadixUI';
+import ZPagination from '@/components/Elements/ZPagination';
+import { ZInviteMemberBtn, ZSettleUpBtn } from '@/components/auth/ZBtns';
 
 // #endregion
 
@@ -36,8 +37,6 @@ import {
 // #endregion
 
 // #region ---- Images Imports ----
-import { ZReceiptOutlineIcon, ZSendOutlineIcon } from '@/assets';
-import ZPagination from '@/components/Elements/ZPagination';
 
 // #endregion
 
@@ -62,13 +61,9 @@ const Friends: React.FC = () => {
           align={ZRUAlignE.center}
           justify={ZRUJustifyE.end}
         >
-          <ZRUButton size='3' color={ZRUColorE.violet} className='!gap-2'>
-            <ZSendOutlineIcon className='w-5 h-5' /> Invite a friend
-          </ZRUButton>
+          <ZInviteMemberBtn />
 
-          <ZRUButton size='3' color={ZRUColorE.indigo} className='!gap-2'>
-            <ZReceiptOutlineIcon className='w-5 h-5' /> Settle Up
-          </ZRUButton>
+          <ZSettleUpBtn />
         </ZRUFlex>
       </ZRUFlex>
 

@@ -3,7 +3,7 @@ import { type ReactNode } from 'react';
  *  Interfaces
  */
 
-// Zaions custom React select type
+// custom React select type
 export interface ZRSelectOptions {
   readonly value?: string | number;
   readonly label?: ReactNode | string | number;

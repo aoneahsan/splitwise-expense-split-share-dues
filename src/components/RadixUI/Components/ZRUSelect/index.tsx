@@ -19,7 +19,7 @@ import {
   type ZRURadiusE,
   type ZRUMarginI,
   type ZRUSelectValueI,
-  type ZRUSelectContentPositionE,
+  ZRUSelectContentPositionE,
   ZRUTextAsE,
   ZRUOrientationE
 } from '@/types/radixUI/index.type';
@@ -27,6 +27,7 @@ import { Responsive } from '@radix-ui/themes/dist/cjs/props';
 import ZRUBox from '../../Layout/ZRUBox';
 import ZRUText from '../../Typography/ZRUText';
 import { ZClassNames } from '@/Packages/ClassNames';
+import { isZNonEmptyString } from '@/utils/helpers';
 interface ZRUSelectI {
   children?: React.ReactNode;
   label?: string;
@@ -63,6 +64,9 @@ interface ZRUSelectI {
   options?: Array<ZRUSelectValueI>;
   labelOrientation?: ZRUOrientationE;
   triggerClassName?: string;
+  isValid?: boolean;
+  errorNode?: React.ReactNode;
+  infoText?: React.ReactNode;
 }
 // #endregion
 
@@ -78,7 +82,10 @@ const ZRUSelect: React.FC<ZRUSelectI> = (props) => {
         <ZRUText
           as={ZRUTextAsE.label}
           size='1'
-          className={ZClassNames('block mb-px', props?.labelClassName)}
+          className={ZClassNames(
+            'block mb-[2px] text-[16px]',
+            props?.labelClassName
+          )}
         >
           {props?.label}
           {props?.required ? (
@@ -111,7 +118,12 @@ const ZRUSelect: React.FC<ZRUSelectI> = (props) => {
           className={props.triggerClassName}
         />
 
-        <Select.Content {...props?.content}>
+        <Select.Content
+          {...props?.content}
+          position={
+            props?.content?.position ?? ZRUSelectContentPositionE.popper
+          }
+        >
           {props?.options?.map((option, index) => {
             return (
               <Select.Item value={option?.value} key={index}>
@@ -121,6 +133,36 @@ const ZRUSelect: React.FC<ZRUSelectI> = (props) => {
           })}
         </Select.Content>
       </Select.Root>
+
+      {/* Error */}
+      {props?.isValid === false &&
+      ((typeof props?.errorNode === 'string' &&
+        isZNonEmptyString(props?.errorNode)) ||
+        (props?.errorNode !== null && props?.errorNode !== undefined)) ? (
+        <ZRUText
+          as={ZRUTextAsE.span}
+          size='1'
+          color={ZRUColorE.tomato}
+          className='font-medium'
+        >
+          {props?.errorNode}
+        </ZRUText>
+      ) : null}
+
+      {/* Info */}
+      {props?.isValid &&
+      ((typeof props?.infoText === 'string' &&
+        isZNonEmptyString(props?.infoText)) ||
+        (props?.infoText !== null && props?.infoText !== undefined)) ? (
+        <ZRUText
+          as={ZRUTextAsE.span}
+          size='1'
+          color={ZRUColorE.gold}
+          className='font-medium'
+        >
+          {props?.infoText}
+        </ZRUText>
+      ) : null}
     </ZRUBox>
   );
 };

@@ -4,7 +4,6 @@ import {
   registerRoute,
   testingRoute,
   forgotRoute,
-  myAccountTree,
   authTree
 } from './AllRoutes';
 import tanstackRootRoute from './RootRoute';
@@ -15,7 +14,6 @@ const routeTree = tanstackRootRoute.addChildren([
   loginRoute,
   testingRoute,
   forgotRoute,
-  myAccountTree,
   authTree
 ]);
 

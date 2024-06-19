@@ -10,12 +10,15 @@ import React from 'react';
 // #region ---- Custom Imports ----
 import {
   ZRUBox,
+  ZRUButton,
   ZRUFlex,
   ZRUHeading,
   ZRUInput,
   ZRUInputSlot,
-  ZRUText
+  ZRUText,
+  ZRUTextArea
 } from '@/components/RadixUI';
+import { ZPrizeInput, ZSelect } from '@/components/Elements';
 
 // #endregion
 
@@ -24,12 +27,8 @@ import {
   ZRUAlignE,
   ZRUColorE,
   ZRUHeadingAsE,
-  ZRUJustifyE,
-  ZRUSideE
+  ZRUJustifyE
 } from '@/types/radixUI/index.type';
-import { ZCloseCircleIcon } from '@/assets';
-import { ZFieldRenderer } from '@/components/Elements/ZDynamicFormBuilder';
-import { FormFieldType } from '@/utils/enums/index.enum';
 
 // #endregion
 
@@ -38,12 +37,11 @@ import { FormFieldType } from '@/utils/enums/index.enum';
 // #endregion
 
 // #region ---- Images Imports ----
+import { ZCloseCircleIcon } from '@/assets';
 
 // #endregion
 
-const ZExpenseFormModal: React.FC<{ hideModal: () => void }> = ({
-  hideModal
-}) => {
+const ZSettleUpModal: React.FC<{ hideModal: () => void }> = ({ hideModal }) => {
   return (
     <ZRUBox>
       <ZRUFlex align={ZRUAlignE.center} justify={ZRUJustifyE.between}>
@@ -52,7 +50,7 @@ const ZExpenseFormModal: React.FC<{ hideModal: () => void }> = ({
           className='text-2xl font-medium'
           color={ZRUColorE.gold}
         >
-          Add an Expense
+          Settle up
         </ZRUHeading>
 
         <ZRUText color={ZRUColorE.gold}>
@@ -62,11 +60,35 @@ const ZExpenseFormModal: React.FC<{ hideModal: () => void }> = ({
           />
         </ZRUText>
       </ZRUFlex>
-      <ZRUBox className='mt-4'>
-        <ZFieldRenderer type={FormFieldType.prize} value='123453' />
+
+      <ZRUBox className='mt-4 *:mt-4'>
+        <ZSelect label='Paid by' options={[]} />
+        <ZSelect label='Paid to' options={[]} />
+        <ZPrizeInput />
+        <ZSelect label='Group' options={[]} />
+        <ZRUTextArea label='Notes' />
       </ZRUBox>
+
+      <ZRUFlex
+        className='mt-5'
+        align={ZRUAlignE.center}
+        justify={ZRUJustifyE.end}
+        gap='3'
+      >
+        <ZRUButton
+          size='3'
+          onClick={() => {
+            hideModal();
+          }}
+        >
+          Cancel
+        </ZRUButton>
+        <ZRUButton size='3' color={ZRUColorE.violet}>
+          Settle
+        </ZRUButton>
+      </ZRUFlex>
     </ZRUBox>
   );
 };
 
-export default ZExpenseFormModal;
+export default ZSettleUpModal;

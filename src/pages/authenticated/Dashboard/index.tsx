@@ -8,13 +8,8 @@ import React from 'react';
 // #endregion
 
 // #region ---- Custom Imports ----
-import {
-  ZRUBox,
-  ZRUButton,
-  ZRUFlex,
-  ZRUHeading,
-  ZRUText
-} from '@/components/RadixUI';
+import { ZRUBox, ZRUFlex, ZRUHeading, ZRUText } from '@/components/RadixUI';
+import { ZAddExpenseBtn, ZSettleUpBtn } from '@/components/auth/ZBtns';
 
 // #endregion
 
@@ -33,13 +28,7 @@ import {
 // #endregion
 
 // #region ---- Images Imports ----
-import {
-  ZAddCircleOutlineIcon,
-  ZPayMoneyIcon,
-  ZReceiptOutlineIcon,
-  ZReceiveMoneyIcon,
-  ZWalletIcon
-} from '@/assets';
+import { ZPayMoneyIcon, ZReceiveMoneyIcon, ZWalletIcon } from '@/assets';
 
 // #endregion
 
@@ -64,13 +53,9 @@ const Dashboard: React.FC = () => {
           align={ZRUAlignE.center}
           justify={ZRUJustifyE.end}
         >
-          <ZRUButton size='3' color={ZRUColorE.violet} className='!gap-1'>
-            <ZAddCircleOutlineIcon className='w-5 h-5' /> Add an Expense
-          </ZRUButton>
+          <ZAddExpenseBtn />
 
-          <ZRUButton size='3' color={ZRUColorE.indigo} className='!gap-2'>
-            <ZReceiptOutlineIcon className='w-5 h-5' /> Settle Up
-          </ZRUButton>
+          <ZSettleUpBtn />
         </ZRUFlex>
       </ZRUFlex>
 

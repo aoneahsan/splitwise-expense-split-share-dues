@@ -7,7 +7,6 @@ const routeParams = {
 
 const AppRoutesCommonPath = {
   onBoarding: '/onboarding',
-  myAccount: '/my-account',
   auth: '/auth',
 } as const;
 
@@ -41,6 +40,10 @@ const AppRoutesE = {
       completePath: `${AppRoutesCommonPath.auth}/friends`,
       single: `/friends/${routeParams.groupId}`,
       singleCompletePath: `${AppRoutesCommonPath.auth}/friends/${routeParams.friendId}`
+    },
+    account: {
+      path: '/my-account',
+      completePath: `${AppRoutesCommonPath.auth}/my-account`
     }
   },
 

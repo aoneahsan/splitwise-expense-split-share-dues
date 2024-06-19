@@ -10,13 +10,11 @@ import { ZClassNames } from '@/Packages/ClassNames';
 // #endregion
 
 // #region ---- Custom Imports ----
-import { ZRUScrollArea } from '@/components/RadixUI';
 import { isZNonEmptyString } from '@/utils/helpers';
 
 // #endregion
 
 // #region ---- Types Imports ----
-import { ZRUScrollbarsE } from '@/types/radixUI/index.type';
 
 // #endregion
 
@@ -54,7 +52,7 @@ const ZSideMenu: React.FC = () => {
   return (
     <div
       className={ZClassNames({
-        'fixed top-0 right-0 z-10  bg-transparent transition-all ease-in-out duration-300 h-full w-full flex justify-start':
+        'fixed top-0 right-0 z-10 bg-transparent transition-all ease-in-out duration-300 h-full w-full flex justify-start':
           true,
         'opacity-100 translate-x-0': ZSidebarRState?.isOpen,
         'opacity-0 -translate-x-[100%]': ZSidebarRState?.isOpen === false
@@ -85,12 +83,10 @@ const ZSideMenu: React.FC = () => {
         })}
         style={containerStyles}
       >
-        <ZRUScrollArea scrollbars={ZRUScrollbarsE.vertical} className='p-5'>
-          {ZSidebarRState?.component !== undefined &&
-          ZSidebarRState?.component !== null ? (
-            <ZSidebarRState.component {...ZSidebarRState.componentProps} />
-          ) : null}
-        </ZRUScrollArea>
+        {ZSidebarRState?.component !== undefined &&
+        ZSidebarRState?.component !== null ? (
+          <ZSidebarRState.component {...ZSidebarRState.componentProps} />
+        ) : null}
       </div>
     </div>
   );

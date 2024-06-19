@@ -24,9 +24,7 @@ import {
   ZRUText
 } from '@/components/RadixUI';
 import ZPagination from '@/components/Elements/ZPagination';
-import ZExpenseFormModal from '@/components/auth/ZExpenseFormModal';
-import { useZModal } from '@/hooks/globalComponents.hook';
-import modalsConstants from '@/utils/constants/modals';
+import { ZAddExpenseBtn, ZSettleUpBtn } from '@/components/auth/ZBtns';
 
 // #endregion
 
@@ -48,21 +46,11 @@ import {
 // #endregion
 
 // #region ---- Images Imports ----
-import {
-  ZAddCircleOutlineIcon,
-  ZBarChartOutlineIcon,
-  ZReceiptOutlineIcon,
-  ZSearchIcon,
-  ZTrendingUpIcon
-} from '@/assets';
+import { ZBarChartOutlineIcon, ZSearchIcon, ZTrendingUpIcon } from '@/assets';
 
 // #endregion
 
 const AllExpenses: React.FC = () => {
-  const { showModal } = useZModal({
-    component: ZExpenseFormModal,
-    width: modalsConstants.modalsWidth.expenseForm
-  });
   return (
     <>
       <ZRUFlex
@@ -83,20 +71,9 @@ const AllExpenses: React.FC = () => {
           align={ZRUAlignE.center}
           justify={ZRUJustifyE.end}
         >
-          <ZRUButton
-            onClick={() => {
-              showModal();
-            }}
-            size='3'
-            color={ZRUColorE.violet}
-            className='!gap-1'
-          >
-            <ZAddCircleOutlineIcon className='w-5 h-5' /> Add an Expense
-          </ZRUButton>
+          <ZAddExpenseBtn />
 
-          <ZRUButton size='3' color={ZRUColorE.indigo} className='!gap-2'>
-            <ZReceiptOutlineIcon className='w-5 h-5' /> Settle Up
-          </ZRUButton>
+          <ZSettleUpBtn />
         </ZRUFlex>
       </ZRUFlex>
 
