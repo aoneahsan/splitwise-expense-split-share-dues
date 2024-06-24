@@ -1,6 +1,13 @@
 // #region ---- Core Imports ----
 import { ZEllipsisVerticalIcon } from '@/assets';
-import { ZRUAvatar, ZRUBox, ZRUFlex, ZRUText } from '@/components/RadixUI';
+import {
+  ZRUAvatar,
+  ZRUBox,
+  ZRUButton,
+  ZRUFlex,
+  ZRUText
+} from '@/components/RadixUI';
+import { useZMediaQueryScale } from '@/hooks/helpers.hook';
 import {
   ZRUAlignE,
   ZRUColorE,
@@ -33,17 +40,22 @@ import React from 'react';
 // #endregion
 
 const ZAuthGroupUser: React.FC = () => {
+  const { isLgScale, isMdScale } = useZMediaQueryScale();
   return (
     <ZRUFlex
       align={ZRUAlignE.center}
-      className='px-4 py-3 rounded-md bg-medium/10'
+      className='px-4 py-3 rounded-md maxMd:flex-col bg-medium/10 maxMd:gap-y-3'
     >
-      <ZRUFlex align={ZRUAlignE.center} gap='3' className='w-2/3'>
+      <ZRUFlex
+        align={ZRUAlignE.center}
+        gap='3'
+        className='w-2/4 minXl:w-1/2 min1150px:w-2/3 maxXs:flex-col maxXs:text-center'
+      >
         <ZRUBox className='relative'>
           <ZRUAvatar
             fallback='1'
             variant='solid'
-            size='5'
+            size={isLgScale ? '5' : '4'}
             color={ZRUColorE.gray}
             radius={ZRURadiusE.full}
           />
@@ -58,7 +70,10 @@ const ZAuthGroupUser: React.FC = () => {
           </ZRUBox>
         </ZRUBox>
         <ZRUBox>
-          <ZRUText as={ZRUTextAsE.p} className='text-base font-medium'>
+          <ZRUText
+            as={ZRUTextAsE.p}
+            className='text-sm font-medium lg:text-base'
+          >
             Name
           </ZRUText>
           <ZRUText
@@ -74,14 +89,17 @@ const ZAuthGroupUser: React.FC = () => {
       <ZRUFlex
         align={ZRUAlignE.center}
         justify={ZRUJustifyE.between}
-        className='w-1/3'
+        className='w-2/4 minXl:w-1/2 min1150px:w-1/3 maxMd:flex-col maxMd:gap-y-3 maxMd:w-full'
       >
-        <ZRUFlex align={ZRUAlignE.center} className='gap-20'>
-          <ZRUBox>
+        <ZRUFlex
+          align={ZRUAlignE.center}
+          className='md:gap-20 gap-3 maxSm:*:w-full maxSm:flex-col maxMd:w-full maxMd:*:flex-1 maxMd:*:text-center maxMd:*:py-2 maxMd:*:overflow-hidden maxMd:*:rounded-md'
+        >
+          <ZRUBox className='maxMd:bg-success-dark/30'>
             <ZRUText
               as={ZRUTextAsE.p}
               color={ZRUColorE.teal}
-              className='text-base font-medium'
+              className='text-sm font-medium lg:text-base'
             >
               Get back
             </ZRUText>
@@ -94,11 +112,11 @@ const ZAuthGroupUser: React.FC = () => {
             </ZRUText>
           </ZRUBox>
 
-          <ZRUBox>
+          <ZRUBox className='maxMd:bg-danger/30'>
             <ZRUText
               as={ZRUTextAsE.p}
               color={ZRUColorE.ruby}
-              className='text-base font-medium'
+              className='text-sm font-medium lg:text-base'
             >
               Owns
             </ZRUText>
@@ -112,7 +130,11 @@ const ZAuthGroupUser: React.FC = () => {
           </ZRUBox>
         </ZRUFlex>
 
-        <ZEllipsisVerticalIcon className='w-5 h-5 transition-all cursor-pointer text-medium hover:text-secondary' />
+        {isMdScale ? (
+          <ZEllipsisVerticalIcon className='w-5 h-5 transition-all cursor-pointer text-medium hover:text-secondary' />
+        ) : (
+          <ZRUButton className='w-full'>Actions</ZRUButton>
+        )}
       </ZRUFlex>
     </ZRUFlex>
   );

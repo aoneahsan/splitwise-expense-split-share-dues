@@ -24,6 +24,7 @@ import {
 } from '@/components/RadixUI';
 import constants from '@/utils/constants';
 import { Notifications } from '@/utils/constants/notification';
+import { useZMediaQueryScale } from '@/hooks/helpers.hook';
 
 // #endregion
 
@@ -56,6 +57,7 @@ import {
 
 const MyAccountPage: React.FC = () => {
   // #region Custom hooks
+  const { isLgScale, isMdScale } = useZMediaQueryScale();
   // #endregion
 
   // #region Constants
@@ -74,7 +76,7 @@ const MyAccountPage: React.FC = () => {
     <ZRUBox>
       <ZRUBox className='w-full px-1 py-2'>
         <ZRUHeading
-          className='text-3xl font-medium'
+          className='text-2xl font-medium xl:text-3xl'
           as={ZRUHeadingAsE.h2}
           color={ZRUColorE.grass}
         >
@@ -85,7 +87,7 @@ const MyAccountPage: React.FC = () => {
       <ZRUFlex align={ZRUAlignE.center} className='gap-2 mt-3'>
         <ZRUAvatar
           fallback='1'
-          size='6'
+          size={isLgScale ? '6' : '5'}
           radius={ZRURadiusE.full}
           color={ZRUColorE.gray}
         />
@@ -103,7 +105,10 @@ const MyAccountPage: React.FC = () => {
         </ZRUBox>
       </ZRUFlex>
 
-      <ZRUFlex className='gap-4 mt-3 *:w-1/3 flex-wrap' align={ZRUAlignE.end}>
+      <ZRUFlex
+        className='gap-4 mt-3 *:w-full *:flex-col md:*:w-[48%] xl:*:w-1/3 flex-wrap'
+        align={ZRUAlignE.end}
+      >
         <ZRUInput label='Your name' size='3' />
         <ZRUInput label='Your email' size='3' />
         <ZRUInput label='Your phone number' size='3' />
@@ -114,7 +119,7 @@ const MyAccountPage: React.FC = () => {
 
       <ZRUBox className='w-full px-1 py-2 mt-5'>
         <ZRUHeading
-          className='text-2xl font-medium'
+          className='text-2xl font-medium xl:text-3xl'
           as={ZRUHeadingAsE.h3}
           color={ZRUColorE.grass}
         >
@@ -138,7 +143,7 @@ const MyAccountPage: React.FC = () => {
                   <ZRUFlex
                     align={ZRUAlignE.center}
                     justify={ZRUJustifyE.between}
-                    className='w-full *:mb-2 px-4 pt-3 pb-2 bg-success-dark/20 *:w-[49%] flex-wrap gap-3 *:px-3 *:py-2 *:rounded-md *:bg-light/80'
+                    className='w-full maxLg:flex-col *:mb-2 px-2 md:px-4 pt-3 pb-2 bg-success-dark/20 lg:*:w-[49%] *:w-full flex-wrap gap-3 *:px-3 *:py-2 *:rounded-md *:bg-light/80 maxLg:text-center'
                   >
                     {element?.items?.map((item, index) => {
                       return (
@@ -146,6 +151,7 @@ const MyAccountPage: React.FC = () => {
                           key={index}
                           align={ZRUAlignE.center}
                           justify={ZRUJustifyE.between}
+                          className='maxMd:flex-col maxMd:gap-y-2'
                         >
                           <ZRUText
                             className='font-medium'
@@ -158,6 +164,7 @@ const MyAccountPage: React.FC = () => {
                             align={ZRUAlignE.center}
                             justify={ZRUJustifyE.end}
                             gap='2'
+                            className='maxMd:gap-3'
                           >
                             {item?.mail ? (
                               <ZRUText color={ZRUColorE.gray}>
@@ -184,7 +191,7 @@ const MyAccountPage: React.FC = () => {
 
       <ZRUBox className='w-full px-1 py-2 mt-5'>
         <ZRUHeading
-          className='text-2xl font-medium'
+          className='text-2xl font-medium xl:text-3xl'
           as={ZRUHeadingAsE.h3}
           color={ZRUColorE.grass}
         >
@@ -193,8 +200,8 @@ const MyAccountPage: React.FC = () => {
       </ZRUBox>
 
       <ZRUBox>
-        <ZRUFlex gap='2' align={ZRUAlignE.start}>
-          <ZRUCheckbox className='mt-1' />
+        <ZRUFlex gap='2' align={ZRUAlignE.start} className='maxMd:flex-col'>
+          <ZRUCheckbox className='mt-1' size={isMdScale ? '2' : '3'} />
           <ZRUBox>
             <ZRUText as={ZRUTextAsE.p} className='text-sm'>
               Allow {constants.productInfo.name} to suggest me as a friend to
@@ -208,7 +215,11 @@ const MyAccountPage: React.FC = () => {
           </ZRUBox>
         </ZRUFlex>
 
-        <ZRUFlex gap='2' align={ZRUAlignE.center} className='mt-4'>
+        <ZRUFlex
+          gap='2'
+          align={ZRUAlignE.center}
+          className='mt-4 maxLg:flex-wrap maxMd:flex-col maxMd:*:w-full'
+        >
           <ZRUButton>Your apps</ZRUButton>
           <ZRUButton>Recent visits</ZRUButton>
           <ZRUButton>Log out on all devices</ZRUButton>
@@ -218,7 +229,7 @@ const MyAccountPage: React.FC = () => {
 
       <ZRUBox className='w-full px-1 py-2 mt-5'>
         <ZRUHeading
-          className='text-2xl font-medium'
+          className='text-2xl font-medium xl:text-3xl'
           as={ZRUHeadingAsE.h3}
           color={ZRUColorE.grass}
         >
@@ -231,7 +242,11 @@ const MyAccountPage: React.FC = () => {
       </ZRUBox>
 
       <ZRUBox className='mb-4'>
-        <ZRUFlex gap='2' align={ZRUAlignE.center} className='mt-4'>
+        <ZRUFlex
+          gap='2'
+          align={ZRUAlignE.center}
+          className='mt-4 maxLg:flex-wrap maxMd:flex-col maxMd:*:w-full'
+        >
           <ZRUButton className='capitalize' size='3' color={ZRUColorE.jade}>
             <ZDiamondOutlineIcon className='w-5 h-5' /> Get
             {constants.productInfo.name} Pro!

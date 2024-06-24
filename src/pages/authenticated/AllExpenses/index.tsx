@@ -20,6 +20,7 @@ import {
   ZRUHeading,
   ZRUInput,
   ZRUInputSlot,
+  ZRUScrollArea,
   ZRUSelect,
   ZRUText
 } from '@/components/RadixUI';
@@ -35,6 +36,8 @@ import {
   ZRUHeadingAsE,
   ZRUJustifyE,
   ZRUOrientationE,
+  ZRUScrollbarTypeE,
+  ZRUScrollbarsE,
   ZRUSelectContentPositionE,
   ZRUTextAsE
 } from '@/types/radixUI/index.type';
@@ -54,20 +57,20 @@ const AllExpenses: React.FC = () => {
   return (
     <>
       <ZRUFlex
-        className='px-1 py-2'
+        className='px-1 py-2 maxSm:flex-col maxSm:gap-y-2'
         align={ZRUAlignE.center}
         justify={ZRUJustifyE.between}
         width='100%'
       >
         <ZRUHeading
-          className='text-3xl font-medium'
+          className='text-2xl font-medium xl:text-3xl'
           as={ZRUHeadingAsE.h2}
           color={ZRUColorE.grass}
         >
           All Expenses
         </ZRUHeading>
         <ZRUFlex
-          className='gap-2'
+          className='gap-2 xs:ms-2 maxSm:*:w-1/2 maxSm:w-full maxXs:*:!w-full maxXs:flex-col'
           align={ZRUAlignE.center}
           justify={ZRUJustifyE.end}
         >
@@ -93,14 +96,14 @@ const AllExpenses: React.FC = () => {
             <ZRUAccordionContent className='*:!p-0'>
               <ZRUBox className='px-4 pt-3 pb-4 bg-success-dark/20'>
                 <ZRUBox className='w-full text-right'>
-                  <ZRUButton className='mb-3'>
+                  <ZRUButton className='mb-3 maxSm:w-full'>
                     <ZBarChartOutlineIcon className='w-5 h-5' /> View Full
                     Charts
                   </ZRUButton>
                 </ZRUBox>
                 <ZRUFlex
-                  align={ZRUAlignE.center}
-                  className='gap-4 *:flex-1 *:px-5 *:py-4 *:text-center *:rounded-md *:shadow-sm *:bg-white/80'
+                  align={ZRUAlignE.stretch}
+                  className='gap-4 min1000px:*:flex-1 *:flex *:flex-col *:items-center *:justify-center *:px-5 *:py-4 *:text-center *:rounded-md *:shadow-sm *:bg-white/80 md:flex-wrap md:*:w-[49.3%] md:justify-between md:gap-2 maxMd:gap-2 maxMd:*:!w-full maxMd:flex-col'
                 >
                   <ZRUBox>
                     <ZRUText
@@ -179,10 +182,10 @@ const AllExpenses: React.FC = () => {
         <ZRUFlex
           align={ZRUAlignE.center}
           justify={ZRUJustifyE.between}
-          className='px-1 py-2 my-2'
+          className='px-1 py-2 my-2 maxMd:flex-col maxMd:gap-y-3 maxMd:*:w-full'
         >
           <ZRUFlex align={ZRUAlignE.center}>
-            <ZRUInput placeholder='Search...'>
+            <ZRUInput placeholder='Search...' className='maxMd:w-full'>
               <ZRUInputSlot>
                 <ZSearchIcon className='w-5 h-5' />
               </ZRUInputSlot>
@@ -191,7 +194,7 @@ const AllExpenses: React.FC = () => {
           <ZRUFlex
             align={ZRUAlignE.center}
             justify={ZRUJustifyE.end}
-            className='gap-3'
+            className='gap-3 maxMd:flex-col maxMd:gap-y-3 maxMd:*:w-full'
           >
             <ZRUSelect
               trigger={{
@@ -201,6 +204,7 @@ const AllExpenses: React.FC = () => {
                 position: ZRUSelectContentPositionE.popper
               }}
               options={[{ value: 'user', label: 'user' }]}
+              className='maxMd:*:w-full'
             />
 
             <ZRUSelect
@@ -211,6 +215,7 @@ const AllExpenses: React.FC = () => {
                 position: ZRUSelectContentPositionE.popper
               }}
               options={[{ value: 'user', label: 'user' }]}
+              className='maxMd:*:w-full'
             />
           </ZRUFlex>
         </ZRUFlex>
@@ -273,11 +278,12 @@ const AllExpenses: React.FC = () => {
           </ZRUBox>
 
           {/* footer */}
-          <ZRUBox className='flex items-center justify-between w-full mt-4 text-tertiary'>
+          <ZRUBox className='flex justify-between w-full mt-4 md:items-center maxMd:gap-y-2 maxMd:flex-col text-tertiary'>
             <ZRUBox>
               <ZRUSelect
                 label='Row per page'
                 labelClassName='font-medium text-sm'
+                triggerClassName='maxMd:flex-1'
                 labelOrientation={ZRUOrientationE.horizontal}
                 options={[
                   { label: '10', value: '10' },

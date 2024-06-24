@@ -44,20 +44,20 @@ const Friends: React.FC = () => {
   return (
     <>
       <ZRUFlex
-        className='px-1 py-2'
+        className='px-1 py-2 maxSm:flex-col maxSm:gap-y-2'
         align={ZRUAlignE.center}
         justify={ZRUJustifyE.between}
         width='100%'
       >
         <ZRUHeading
-          className='text-3xl font-medium'
+          className='text-2xl font-medium xl:text-3xl'
           as={ZRUHeadingAsE.h2}
           color={ZRUColorE.grass}
         >
           Friends
         </ZRUHeading>
         <ZRUFlex
-          className='gap-2'
+          className='gap-2 xs:ms-2 maxSm:*:w-1/2 maxSm:w-full maxXs:*:!w-full maxXs:flex-col'
           align={ZRUAlignE.center}
           justify={ZRUJustifyE.end}
         >
@@ -119,11 +119,12 @@ const Friends: React.FC = () => {
           </ZRUBox>
 
           {/* footer */}
-          <ZRUBox className='flex items-center justify-between w-full mt-4 text-tertiary'>
+          <ZRUBox className='flex justify-between w-full mt-4 md:items-center maxMd:gap-y-2 maxMd:flex-col text-tertiary'>
             <ZRUBox>
               <ZRUSelect
                 label='Row per page'
                 labelClassName='font-medium text-sm'
+                triggerClassName='maxMd:flex-1'
                 labelOrientation={ZRUOrientationE.horizontal}
                 options={[
                   { label: '10', value: '10' },

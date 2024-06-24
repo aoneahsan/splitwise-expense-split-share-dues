@@ -8,7 +8,7 @@ import React from 'react';
 // #endregion
 
 // #region ---- Custom Imports ----
-import { ZRUBox, ZRUFlex, ZRUText } from '@/components/RadixUI';
+import { ZRUBox, ZRUButton, ZRUFlex, ZRUText } from '@/components/RadixUI';
 
 // #endregion
 
@@ -16,14 +16,21 @@ import { ZRUBox, ZRUFlex, ZRUText } from '@/components/RadixUI';
 import {
   ZChevronLeftIcon,
   ZChevronRightIcon,
+  ZDoubleArrowLeftIcon,
+  ZDoubleArrowRightIcon,
   ZEllipsisHorizontalIcon
 } from '@/assets';
 
 // #endregion
 
 // #region ---- Types Imports ----
-import { ZRUAlignE, ZRUJustifyE } from '@/types/radixUI/index.type';
+import {
+  ZRUAlignE,
+  ZRUJustifyE,
+  ZRUVariantE
+} from '@/types/radixUI/index.type';
 import { ZClassNames } from '@/Packages/ClassNames';
+import { useZMediaQueryScale } from '@/hooks/helpers.hook';
 interface ZPaginationI {
   disablePrevious?: boolean;
   disableNext?: boolean;
@@ -53,19 +60,28 @@ const ZPagination: React.FC<ZPaginationI> = ({
   nextOnClick,
   itemOnClick
 }) => {
+  const { isMdScale, isXsScale } = useZMediaQueryScale();
   return (
     <ZRUFlex
       align={ZRUAlignE.center}
-      className='gap-3 px-3 py-2 font-medium bg-white border rounded-md shadow-sm w-max'
+      className='gap-3 px-3 py-2 font-medium bg-white border rounded-md shadow-sm maxMd:w-full w-max maxXs:*:w-full  maxXs:flex-col'
     >
       <ZRUText
         onClick={firstOnClick}
-        className={ZClassNames('text-xs', {
+        className={ZClassNames('md:text-xs', {
           'opacity-75 cursor-not-allowed': disableFirst,
           'cursor-pointer': !disableFirst
         })}
       >
-        FIRST
+        {isMdScale ? (
+          'FIRST'
+        ) : isXsScale ? (
+          <ZDoubleArrowLeftIcon />
+        ) : (
+          <ZRUButton className='w-full' variant={ZRUVariantE.soft}>
+            First
+          </ZRUButton>
+        )}
       </ZRUText>
       <ZRUFlex
         align={ZRUAlignE.center}
@@ -75,12 +91,20 @@ const ZPagination: React.FC<ZPaginationI> = ({
           'cursor-pointer': !disablePrevious
         })}
       >
-        <ZChevronLeftIcon /> PREV
+        {isXsScale ? (
+          <>
+            <ZChevronLeftIcon /> {isMdScale ? 'PREV' : null}
+          </>
+        ) : (
+          <ZRUButton className='w-full' variant={ZRUVariantE.soft}>
+            Prev
+          </ZRUButton>
+        )}
       </ZRUFlex>
 
       <ZRUFlex
         align={ZRUAlignE.center}
-        className='mx-1 gap-2 *:text-sm text-tertiary'
+        className='mx-1 gap-2 *:text-sm text-tertiary maxMd:flex-1 maxMd:justify-center'
       >
         {paginationItems?.map((el, index) => {
           if (typeof el === 'number') {
@@ -124,16 +148,32 @@ const ZPagination: React.FC<ZPaginationI> = ({
           'cursor-pointer': !disableNext
         })}
       >
-        NEXT <ZChevronRightIcon />
+        {isXsScale ? (
+          <>
+            {isMdScale ? 'NEXT' : null} <ZChevronRightIcon />
+          </>
+        ) : (
+          <ZRUButton className='w-full' variant={ZRUVariantE.soft}>
+            Next
+          </ZRUButton>
+        )}
       </ZRUFlex>
       <ZRUText
         onClick={lastOnClick}
-        className={ZClassNames('text-xs', {
+        className={ZClassNames('md:text-xs', {
           'opacity-75 cursor-not-allowed': disableLast,
           'cursor-pointer': !disableLast
         })}
       >
-        LAST
+        {isMdScale ? (
+          'LAST'
+        ) : isXsScale ? (
+          <ZDoubleArrowRightIcon />
+        ) : (
+          <ZRUButton className='w-full' variant={ZRUVariantE.soft}>
+            Last
+          </ZRUButton>
+        )}
       </ZRUText>
     </ZRUFlex>
   );

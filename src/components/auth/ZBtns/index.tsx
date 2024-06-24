@@ -32,10 +32,12 @@ import {
   ZReceiptOutlineIcon,
   ZSendOutlineIcon
 } from '@/assets';
+import { useZMediaQueryScale } from '@/hooks/helpers.hook';
 
 // #endregion
 
 export const ZAddExpenseBtn: React.FC = () => {
+  const { isMdScale } = useZMediaQueryScale();
   const { openSidebar } = useZSideBar({
     component: ZExpenseFormSideBar,
     width: overlays.sidebarsWidth.expenseForm
@@ -46,7 +48,7 @@ export const ZAddExpenseBtn: React.FC = () => {
       onClick={() => {
         openSidebar();
       }}
-      size='3'
+      size={isMdScale ? '3' : '2'}
       color={ZRUColorE.violet}
       className='!gap-1'
     >
@@ -56,13 +58,14 @@ export const ZAddExpenseBtn: React.FC = () => {
 };
 
 export const ZSettleUpBtn: React.FC = () => {
+  const { isMdScale } = useZMediaQueryScale();
   const { showModal: showZSettleUpModal } = useZModal({
     component: ZSettleUpModal,
     width: overlays.modalsWidth.settleUpForm
   });
   return (
     <ZRUButton
-      size='3'
+      size={isMdScale ? '3' : '2'}
       color={ZRUColorE.indigo}
       className='!gap-2'
       onClick={() => {
@@ -75,13 +78,14 @@ export const ZSettleUpBtn: React.FC = () => {
 };
 
 export const ZInviteMemberBtn: React.FC = () => {
+  const { isMdScale } = useZMediaQueryScale();
   const { showModal: showZInviteMemberModal } = useZModal({
     component: ZInviteMemberModal,
     width: overlays.modalsWidth.settleUpForm
   });
   return (
     <ZRUButton
-      size='3'
+      size={isMdScale ? '3' : '2'}
       color={ZRUColorE.violet}
       className='!gap-2'
       onClick={() => {

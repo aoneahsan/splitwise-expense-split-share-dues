@@ -109,8 +109,8 @@ import { AiOutlineCloseCircle as ZCloseCircleIcon } from "react-icons/ai";
 import { BsAppIndicator as ZAppIndicatorIcon } from "react-icons/bs";
 import { IoDiamondOutline as ZDiamondOutlineIcon } from "react-icons/io5";
 import { RiAccountBoxLine as ZAccountBoxLineIcon } from "react-icons/ri";
-
-
+import { MdKeyboardDoubleArrowLeft as ZDoubleArrowLeftIcon } from "react-icons/md";
+import { MdKeyboardDoubleArrowRight as ZDoubleArrowRightIcon } from "react-icons/md";
 
 
 // Brands
@@ -241,5 +241,7 @@ export {
   ZCloseCircleIcon,
   ZAppIndicatorIcon,
   ZDiamondOutlineIcon,
-  ZAccountBoxLineIcon
+  ZAccountBoxLineIcon,
+  ZDoubleArrowLeftIcon,
+  ZDoubleArrowRightIcon
 };
