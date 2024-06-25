@@ -20,7 +20,6 @@ import {
   ZRUHeading,
   ZRUInput,
   ZRUInputSlot,
-  ZRUScrollArea,
   ZRUSelect,
   ZRUText
 } from '@/components/RadixUI';
@@ -36,8 +35,6 @@ import {
   ZRUHeadingAsE,
   ZRUJustifyE,
   ZRUOrientationE,
-  ZRUScrollbarTypeE,
-  ZRUScrollbarsE,
   ZRUSelectContentPositionE,
   ZRUTextAsE
 } from '@/types/radixUI/index.type';

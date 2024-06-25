@@ -127,7 +127,10 @@ export const ZSelect: React.FC<ZSelectI> = ({
   return (
     <ZRUBox className={className}>
       {isZNonEmptyString(label) ? (
-        <ZRUText as={ZRUTextAsE.label} className={labelClassName}>
+        <ZRUText
+          as={ZRUTextAsE.label}
+          className={ZClassNames(labelClassName, 'maxSm:!text-sm')}
+        >
           {label}
           {required ? (
             <ZRUText

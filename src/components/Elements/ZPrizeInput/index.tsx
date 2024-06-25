@@ -99,7 +99,10 @@ const ZPrizeInput: React.FC<ZPrizeInputI> = ({
 
   return (
     <ZRUBox className={ZClassNames(className)}>
-      <ZRUText as={ZRUTextAsE.label} className={ZClassNames(labelClassName)}>
+      <ZRUText
+        as={ZRUTextAsE.label}
+        className={ZClassNames(labelClassName, 'maxSm:!text-sm')}
+      >
         Prize
         {required ? (
           <ZRUText
@@ -111,10 +114,10 @@ const ZPrizeInput: React.FC<ZPrizeInputI> = ({
           </ZRUText>
         ) : null}
       </ZRUText>
-      <ZRUFlex align={ZRUAlignE.start} gap='1'>
+      <ZRUFlex align={ZRUAlignE.start} gap='1' className='maxSm:flex-col'>
         <ZRUSelect
           size='3'
-          className='w-20'
+          className='w-full sm:w-20'
           options={ZCurrenciesData}
           value={compState?.currency?.value}
           triggerClassName='w-full'
@@ -122,7 +125,7 @@ const ZPrizeInput: React.FC<ZPrizeInputI> = ({
         />
         <ZRUInput
           size='3'
-          className='flex-1'
+          className='flex-1 maxSm:w-full'
           isValid={isValid}
           errorNode={errorNode}
           infoText={infoText}

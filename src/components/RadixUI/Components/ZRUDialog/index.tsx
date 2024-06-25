@@ -77,6 +77,7 @@ const ZRUDialog: React.FC<ZRUDialogI> = ({
         minWidth={minWidth}
         height={height}
         asChild={asChild}
+        className='maxSm:p-3'
         onInteractOutside={(e) => {
           e.preventDefault(); // To prevent it from closing when clicking outside
         }}

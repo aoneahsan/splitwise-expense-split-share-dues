@@ -53,7 +53,10 @@ const ZExpenseFormSideBar: React.FC<{ closeSidebar: () => void }> = ({
 }) => {
   return (
     <ZRUBox className='relative h-full'>
-      <ZRUScrollArea scrollbars={ZRUScrollbarsE.vertical} className='p-5'>
+      <ZRUScrollArea
+        scrollbars={ZRUScrollbarsE.vertical}
+        className='p-5 maxSm:pb-14'
+      >
         <ZRUFlex align={ZRUAlignE.center} justify={ZRUJustifyE.between}>
           <ZRUHeading color={ZRUColorE.grass}>Add an Expense</ZRUHeading>
           <ZCloseCircleIcon
@@ -96,7 +99,11 @@ const ZExpenseFormSideBar: React.FC<{ closeSidebar: () => void }> = ({
           />
 
           <ZRUBox className='mt-5'>
-            <ZRUFlex align={ZRUAlignE.center} justify={ZRUJustifyE.between}>
+            <ZRUFlex
+              align={ZRUAlignE.center}
+              justify={ZRUJustifyE.between}
+              className='maxSm:flex-col maxSm:*:w-full maxSm:gap-y-2'
+            >
               <ZRUFlex align={ZRUAlignE.center} gap='2'>
                 <ZRUAvatar fallback='1' /> <ZRUText>Name here</ZRUText>
               </ZRUFlex>
@@ -110,7 +117,7 @@ const ZExpenseFormSideBar: React.FC<{ closeSidebar: () => void }> = ({
       </ZRUScrollArea>
 
       <ZRUFlex
-        className='absolute bottom-0 left-0 w-full h-16 gap-3 px-4 shadow-inner bg-light'
+        className='absolute bottom-0 left-0 w-full sm:h-16 gap-3 px-4 shadow-inner bg-light maxSm:flex-col maxSm:*:w-full maxSm:py-2'
         justify={ZRUJustifyE.end}
         align={ZRUAlignE.center}
       >

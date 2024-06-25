@@ -73,12 +73,15 @@ const ZRUTextArea: React.FC<ZRUTextAreaI> = ({
   return (
     <ZRUBox className={className} style={style}>
       {isZNonEmptyString(label) ? (
-        <ZRUText as={ZRUTextAsE.label}>
+        <ZRUText
+          as={ZRUTextAsE.label}
+          className={ZClassNames(labelClassName, 'maxSm:!text-sm')}
+        >
           {label}
           {required ? (
             <ZRUText
               as={ZRUTextAsE.span}
-              className={ZClassNames('ms-1', labelClassName)}
+              className='ms-1'
               color={ZRUColorE.tomato}
             >
               *

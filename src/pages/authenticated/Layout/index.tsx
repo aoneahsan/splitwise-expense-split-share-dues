@@ -11,17 +11,18 @@ import { Outlet, useMatchRoute } from '@tanstack/react-router';
 // #region ---- Custom Imports ----
 import {
   ZRUBox,
+  ZRUButton,
   ZRUFlex,
   ZRUHeading,
   ZRUScrollArea,
   ZRUText
 } from '@/components/RadixUI';
 import { ZPage } from '@/components/Elements';
+import ZAuthSidebarContent from '@/components/auth/ZAuthSidebarContent';
 import ZAuthNavigation from '@/components/auth/ZAuthNavigation';
 import constants from '@/utils/constants';
 import { AppRoutes } from '@/Routes/AppRoutes';
-import { ZClassNames } from '@/Packages/ClassNames';
-import { useZNavigate } from '@/hooks/navigation.hook';
+import { useZMediaQueryScale } from '@/hooks/helpers.hook';
 
 // #endregion
 
@@ -42,66 +43,19 @@ import {
 // #endregion
 
 // #region ---- Images Imports ----
-import {
-  ZFlagIcon,
-  ZFriendsOutline,
-  ZGroupOutlineIcon,
-  ZListIcon,
-  ZPresentationChartOutlineIcon,
-  ZScaleBalancedIcon,
-  zAppStoreLogo,
-  zGooglePlayLogo
-} from '@/assets';
+import { ZScaleBalancedIcon, zAppStoreLogo, zGooglePlayLogo } from '@/assets';
 
 // #endregion
 
 const Layout: React.FC = () => {
   const matchRoute = useMatchRoute();
-  const navigate = useZNavigate();
+  const { is900pxScale } = useZMediaQueryScale();
+
   // #region Constants
   const pageHelmet = useMemo(
     () => ({
       title: `${constants.productInfo.name} - Dashboard - ${constants.companyBusinessDetails.name}`
     }),
-    []
-  );
-
-  const items = useMemo(
-    () => [
-      {
-        title: 'Dashboard',
-        icon: <ZPresentationChartOutlineIcon className='w-6 h-6' />,
-        routes: [AppRoutes.authSub.dashboard.completePath],
-        mainRoute: AppRoutes.authSub.dashboard.completePath
-      },
-      {
-        title: 'Recent activity',
-        icon: <ZFlagIcon className='w-5 h-5' />,
-        routes: [AppRoutes.authSub.recentActivity.completePath],
-        mainRoute: AppRoutes.authSub.recentActivity.completePath
-      },
-      {
-        title: 'All expenses',
-        icon: <ZListIcon className='w-5 h-5' />,
-        routes: [AppRoutes.authSub.allExpenses.completePath],
-        mainRoute: AppRoutes.authSub.allExpenses.completePath
-      },
-      {
-        title: 'Groups',
-        icon: <ZGroupOutlineIcon className='w-6 h-6' />,
-        routes: [
-          AppRoutes.authSub.groups.completePath,
-          AppRoutes.authSub.groups.singleCompletePath
-        ],
-        mainRoute: AppRoutes.authSub.groups.completePath
-      },
-      {
-        title: 'Friends',
-        icon: <ZFriendsOutline className='w-6 h-6' />,
-        routes: [AppRoutes.authSub.friends.completePath],
-        mainRoute: AppRoutes.authSub.friends.completePath
-      }
-    ],
     []
   );
 
@@ -125,39 +79,11 @@ const Layout: React.FC = () => {
     <ZPage helmet={pageHelmet}>
       <ZAuthNavigation />
       <ZRUBox className='flex w-full h-[calc(100vh-3.3125rem)]'>
-        <aside className='h-full max900px:hidden text-sm justify-between flex flex-col bg-white border-e shadow-sm xl:min-w-80 min-w-48 text-white xl:p-3.5'>
-          <ZRUBox className='flex flex-col w-full gap-1 p-2 font-sans text-base font-normal text-body'>
-            {items?.map((item, index) => {
-              const isAnyRouteActive = item?.routes?.some((route) =>
-                matchRoute({
-                  to: route
-                })
-              );
-              return (
-                <ZRUBox
-                  key={index}
-                  className={ZClassNames(
-                    'flex items-center w-full p-3 font-medium leading-tight transition-all rounded-lg outline-none cursor-pointer text-start hover:bg-success-tint/20 hover:bg-opacity-80 hover:text-success-dark',
-                    {
-                      'bg-success-tint/20 bg-opacity-80 text-success-dark':
-                        isAnyRouteActive
-                    }
-                  )}
-                  onClick={() => {
-                    navigate({
-                      to: item?.mainRoute
-                    });
-                  }}
-                >
-                  <ZRUBox className='grid mr-4 place-items-center'>
-                    {item.icon}
-                  </ZRUBox>
-                  <ZRUText>{item?.title}</ZRUText>
-                </ZRUBox>
-              );
-            })}
-          </ZRUBox>
-        </aside>
+        {is900pxScale ? (
+          <aside className='h-full text-sm justify-between flex flex-col bg-white border-e shadow-sm xl:min-w-80 min-w-48 text-white xl:p-3.5'>
+            <ZAuthSidebarContent />
+          </aside>
+        ) : null}
 
         <ZRUBox className='flex-1 h-full px-2 py-4 xl:px-5 bg-light'>
           <ZRUScrollArea scrollbars={ZRUScrollbarsE.vertical}>

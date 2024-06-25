@@ -18,6 +18,7 @@ import {
   ZRUText,
   ZRUTextArea
 } from '@/components/RadixUI';
+import { useZMediaQueryScale } from '@/hooks/helpers.hook';
 
 // #endregion
 
@@ -43,6 +44,7 @@ import { ZCloseCircleIcon } from '@/assets';
 const ZInviteMemberModal: React.FC<{ hideModal: () => void }> = ({
   hideModal
 }) => {
+  const { isSmScale } = useZMediaQueryScale();
   return (
     <ZRUBox>
       <ZRUFlex align={ZRUAlignE.center} justify={ZRUJustifyE.between}>
@@ -71,20 +73,20 @@ const ZInviteMemberModal: React.FC<{ hideModal: () => void }> = ({
       </ZRUBox>
 
       <ZRUFlex
-        className='mt-5'
+        className='mt-5 maxSm:flex-col maxSm:*:w-full'
         align={ZRUAlignE.center}
         justify={ZRUJustifyE.end}
         gap='3'
       >
         <ZRUButton
-          size='3'
+          size={isSmScale ? '3' : '2'}
           onClick={() => {
             hideModal();
           }}
         >
           Cancel
         </ZRUButton>
-        <ZRUButton size='3' color={ZRUColorE.violet}>
+        <ZRUButton size={isSmScale ? '3' : '2'} color={ZRUColorE.violet}>
           Send
         </ZRUButton>
       </ZRUFlex>
