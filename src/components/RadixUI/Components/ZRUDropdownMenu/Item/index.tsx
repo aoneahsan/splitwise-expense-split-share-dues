@@ -21,6 +21,7 @@ interface ZRUDropdownMenuItemI {
   className?: string;
   color?: ZRUColorE;
   shortcut?: string;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 // #endregion
 

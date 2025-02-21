@@ -49,7 +49,9 @@ const ZRUDropdownMenu: React.FC<ZRUDropdownMenuI> = ({
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger>
-        <Button variant={ZRUVariantE?.ghost}>{trigger?.children}</Button>
+        <Button className='!bg-transparent' variant={ZRUVariantE?.ghost}>
+          {trigger?.children}
+        </Button>
       </DropdownMenu.Trigger>
       <DropdownMenu.Content
         style={style}

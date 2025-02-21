@@ -22,6 +22,7 @@ import {
   ZRUColorE,
   ZRUTextAsE
 } from '@/types/radixUI/index.type';
+import { ZClassNames } from '@/Packages/ClassNames';
 interface ZRUTextAreaI {
   className?: string;
   textAriaClassName?: string;
@@ -34,8 +35,12 @@ interface ZRUTextAreaI {
   name?: string;
   radius?: ZRURadiusE;
   required?: boolean;
+  labelClassName?: string;
   label?: string;
   placeholder?: string;
+  isValid?: boolean;
+  errorNode?: React.ReactNode;
+  infoText?: React.ReactNode;
   onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
   onBlur?: React.FocusEventHandler<HTMLTextAreaElement>;
 }
@@ -51,6 +56,7 @@ const ZRUTextArea: React.FC<ZRUTextAreaI> = ({
   style,
   value,
   size,
+  labelClassName,
   variant,
   color,
   name,
@@ -58,13 +64,19 @@ const ZRUTextArea: React.FC<ZRUTextAreaI> = ({
   required,
   label,
   placeholder,
+  isValid,
+  errorNode,
+  infoText,
   onChange,
   onBlur
 }) => {
   return (
     <ZRUBox className={className} style={style}>
       {isZNonEmptyString(label) ? (
-        <ZRUText as={ZRUTextAsE.label}>
+        <ZRUText
+          as={ZRUTextAsE.label}
+          className={ZClassNames(labelClassName, 'maxSm:!text-sm')}
+        >
           {label}
           {required ? (
             <ZRUText
@@ -90,6 +102,34 @@ const ZRUTextArea: React.FC<ZRUTextAreaI> = ({
         onChange={onChange}
         onBlur={onBlur}
       />
+
+      {/* Error */}
+      {isValid === false &&
+      ((typeof errorNode === 'string' && isZNonEmptyString(errorNode)) ||
+        (errorNode !== null && errorNode !== undefined)) ? (
+        <ZRUText
+          as={ZRUTextAsE.span}
+          size='1'
+          color={ZRUColorE.tomato}
+          className='font-medium'
+        >
+          {errorNode}
+        </ZRUText>
+      ) : null}
+
+      {/* Info */}
+      {isValid &&
+      ((typeof infoText === 'string' && isZNonEmptyString(infoText)) ||
+        (infoText !== null && infoText !== undefined)) ? (
+        <ZRUText
+          as={ZRUTextAsE.span}
+          size='1'
+          color={ZRUColorE.gold}
+          className='font-medium'
+        >
+          {infoText}
+        </ZRUText>
+      ) : null}
     </ZRUBox>
   );
 };

@@ -53,8 +53,17 @@
 
 /* #region Global */
 body {
-  font-family: 'nunitoRegular', sans-serif;
   overflow-x: hidden;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'nunitoRegular', sans-serif;
 }
 
 /* Chrome, Safari, Edge, Opera */

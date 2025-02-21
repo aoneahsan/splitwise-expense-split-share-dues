@@ -115,6 +115,10 @@ const helmetDefaults = {
   // ...
 } as const;
 
+const defaultValues = {
+  currency: { value: 'USD', label: 'United States dollar', symbol: '$' }
+} as const
+
 /**
  * Object containing various constants for the application.
  */
@@ -130,7 +134,8 @@ const constants = {
   externalSites,
   mediaScales,
   helmetDefaults,
-  timeInterval
+  timeInterval,
+  defaultValues
 };
 
 export default constants;

@@ -15,6 +15,10 @@ export default {
       maxLg: { max: '1099px' },
       min900px: { min: '900px' },
       max900px: { max: '900px' },
+      min1000px: { min: '1000px' },
+      max1000px: { max: '1000px' },
+      min1150px: { min: '1150px' },
+      max1150px: { max: '1150px' },
       xl: { min: '1440px' },
       maxXl: { max: '1439px' }
     },

@@ -10,12 +10,15 @@ import React from 'react';
 // #region ---- Custom Imports ----
 import {
   ZRUBox,
+  ZRUButton,
   ZRUFlex,
   ZRUHeading,
   ZRUInput,
   ZRUInputSlot,
-  ZRUText
+  ZRUText,
+  ZRUTextArea
 } from '@/components/RadixUI';
+import { useZMediaQueryScale } from '@/hooks/helpers.hook';
 
 // #endregion
 
@@ -24,12 +27,8 @@ import {
   ZRUAlignE,
   ZRUColorE,
   ZRUHeadingAsE,
-  ZRUJustifyE,
-  ZRUSideE
+  ZRUJustifyE
 } from '@/types/radixUI/index.type';
-import { ZCloseCircleIcon } from '@/assets';
-import { ZFieldRenderer } from '@/components/Elements/ZDynamicFormBuilder';
-import { FormFieldType } from '@/utils/enums/index.enum';
 
 // #endregion
 
@@ -38,12 +37,14 @@ import { FormFieldType } from '@/utils/enums/index.enum';
 // #endregion
 
 // #region ---- Images Imports ----
+import { ZCloseCircleIcon } from '@/assets';
 
 // #endregion
 
-const ZExpenseFormModal: React.FC<{ hideModal: () => void }> = ({
+const ZInviteMemberModal: React.FC<{ hideModal: () => void }> = ({
   hideModal
 }) => {
+  const { isSmScale } = useZMediaQueryScale();
   return (
     <ZRUBox>
       <ZRUFlex align={ZRUAlignE.center} justify={ZRUJustifyE.between}>
@@ -52,7 +53,7 @@ const ZExpenseFormModal: React.FC<{ hideModal: () => void }> = ({
           className='text-2xl font-medium'
           color={ZRUColorE.gold}
         >
-          Add an Expense
+          Invite friends
         </ZRUHeading>
 
         <ZRUText color={ZRUColorE.gold}>
@@ -62,11 +63,35 @@ const ZExpenseFormModal: React.FC<{ hideModal: () => void }> = ({
           />
         </ZRUText>
       </ZRUFlex>
-      <ZRUBox className='mt-4'>
-        <ZFieldRenderer type={FormFieldType.password} value='123453' />
+
+      <ZRUBox className='mt-4 *:mt-4'>
+        <ZRUInput>
+          <ZRUInputSlot className='font-semibold'>To:</ZRUInputSlot>
+        </ZRUInput>
+
+        <ZRUTextArea placeholder='include a optional message...' />
       </ZRUBox>
+
+      <ZRUFlex
+        className='mt-5 maxSm:flex-col maxSm:*:w-full'
+        align={ZRUAlignE.center}
+        justify={ZRUJustifyE.end}
+        gap='3'
+      >
+        <ZRUButton
+          size={isSmScale ? '3' : '2'}
+          onClick={() => {
+            hideModal();
+          }}
+        >
+          Cancel
+        </ZRUButton>
+        <ZRUButton size={isSmScale ? '3' : '2'} color={ZRUColorE.violet}>
+          Send
+        </ZRUButton>
+      </ZRUFlex>
     </ZRUBox>
   );
 };
 
-export default ZExpenseFormModal;
+export default ZInviteMemberModal;

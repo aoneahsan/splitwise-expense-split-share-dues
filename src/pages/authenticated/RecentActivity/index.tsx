@@ -32,7 +32,7 @@ const RecentActivity: React.FC = () => {
     <>
       <ZRUBox className='w-full px-1 py-2'>
         <ZRUHeading
-          className='text-3xl font-medium'
+          className='text-2xl font-medium xl:text-3xl'
           as={ZRUHeadingAsE.h2}
           color={ZRUColorE.grass}
         >
@@ -40,7 +40,7 @@ const RecentActivity: React.FC = () => {
         </ZRUHeading>
       </ZRUBox>
 
-      <ZRUBox className='flex flex-col w-full gap-4 px-1 mt-5'>
+      <ZRUBox className='flex flex-col w-full gap-4 px-1 mt-1 md:mt-5'>
         <ZAuthNotification
           notificationType={ZNotificationTypesEnum.expenseAdded}
           primaryText='Expense Was added'

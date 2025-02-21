@@ -142,7 +142,7 @@ export const Storage = {
  *   - If the input is a valid string, the function returns the string with the first letter capitalized.
  * @returns {string} The capitalized string if the input is valid, otherwise an empty string.
  *  */
-export const makeWorkCapitalize = (value: string | undefined | null): string => {
+export const makeWordCapitalize = (value: string | undefined | null): string => {
   if (value !== undefined && value !== null && value?.trim()?.length > 0) {
     const modStr = value[0].toUpperCase() + value.slice(1);
     return modStr;

@@ -30,5 +30,6 @@ export enum FormFieldType {
   date = 'date',
   select = 'select',
   description = 'description',
+  ratio = 'ratio',
   prize = 'prize'
 }

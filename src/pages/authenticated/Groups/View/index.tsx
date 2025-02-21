@@ -14,9 +14,15 @@ import {
   ZRUCheckbox,
   ZRUFlex,
   ZRUHeading,
-  ZRUSelect,
-  ZRUText
+  ZRUSelect
 } from '@/components/RadixUI';
+import ZPagination from '@/components/Elements/ZPagination';
+import ZAuthGroupUser from '@/components/auth/ZAuthGroupUser';
+import {
+  ZAddExpenseBtn,
+  ZInviteMemberBtn,
+  ZSettleUpBtn
+} from '@/components/auth/ZBtns';
 
 // #endregion
 
@@ -27,8 +33,7 @@ import {
   ZRUHeadingAsE,
   ZRUJustifyE,
   ZRUOrientationE,
-  ZRUSelectContentPositionE,
-  ZRUTextAsE
+  ZRUSelectContentPositionE
 } from '@/types/radixUI/index.type';
 
 // #endregion
@@ -38,13 +43,7 @@ import {
 // #endregion
 
 // #region ---- Images Imports ----
-import {
-  ZAddCircleOutlineIcon,
-  ZReceiptOutlineIcon,
-  ZScaleBalancedIcon,
-  ZSendOutlineIcon
-} from '@/assets';
-import ZPagination from '@/components/Elements/ZPagination';
+import { ZSendOutlineIcon } from '@/assets';
 
 // #endregion
 
@@ -52,30 +51,26 @@ const GroupView: React.FC = () => {
   return (
     <>
       <ZRUFlex
-        className='px-1 py-2'
+        className='px-1 py-2 maxSm:flex-col maxSm:gap-y-2'
         align={ZRUAlignE.center}
         justify={ZRUJustifyE.between}
         width='100%'
       >
         <ZRUHeading
-          className='text-3xl font-medium'
+          className='text-2xl font-medium xl:text-3xl'
           as={ZRUHeadingAsE.h2}
           color={ZRUColorE.grass}
         >
           Group
         </ZRUHeading>
         <ZRUFlex
-          className='gap-2'
+          className='gap-2 xs:ms-2 maxSm:*:w-1/2 maxSm:w-full maxXs:*:!w-full maxXs:flex-col'
           align={ZRUAlignE.center}
           justify={ZRUJustifyE.end}
         >
-          <ZRUButton size='3' color={ZRUColorE.violet} className='!gap-1'>
-            <ZAddCircleOutlineIcon className='w-5 h-5' /> Add an Expense
-          </ZRUButton>
+          <ZAddExpenseBtn />
 
-          <ZRUButton size='3' color={ZRUColorE.indigo} className='!gap-2'>
-            <ZReceiptOutlineIcon className='w-5 h-5' /> Settle Up
-          </ZRUButton>
+          <ZSettleUpBtn />
         </ZRUFlex>
       </ZRUFlex>
 
@@ -135,11 +130,12 @@ const GroupView: React.FC = () => {
           </ZRUBox>
 
           {/* footer */}
-          <ZRUBox className='flex items-center justify-between w-full mt-4 text-tertiary'>
+          <ZRUBox className='flex justify-between w-full mt-4 md:items-center maxMd:gap-y-2 maxMd:flex-col text-tertiary'>
             <ZRUBox>
               <ZRUSelect
                 label='Row per page'
                 labelClassName='font-medium text-sm'
+                triggerClassName='maxMd:flex-1'
                 labelOrientation={ZRUOrientationE.horizontal}
                 options={[
                   { label: '10', value: '10' },
@@ -163,34 +159,32 @@ const GroupView: React.FC = () => {
       </ZRUBox>
 
       <ZRUFlex
-        className='px-1 py-2 mt-8'
+        className='px-1 py-2 mt-8 maxSm:flex-col maxSm:gap-y-2'
         align={ZRUAlignE.center}
         justify={ZRUJustifyE.between}
         width='100%'
       >
         <ZRUHeading
-          className='text-3xl font-medium'
+          className='text-2xl font-medium xl:text-3xl'
           as={ZRUHeadingAsE.h2}
           color={ZRUColorE.grass}
         >
           Member
         </ZRUHeading>
         <ZRUFlex
-          className='gap-2'
+          className='gap-2 xs:ms-2 maxSm:*:w-1/2 maxSm:w-full maxXs:*:!w-full maxXs:flex-col'
           align={ZRUAlignE.center}
           justify={ZRUJustifyE.end}
         >
-          <ZRUButton size='3' color={ZRUColorE.violet} className='!gap-2'>
-            <ZSendOutlineIcon className='w-5 h-5' /> Invite a Member
-          </ZRUButton>
+          <ZInviteMemberBtn />
 
-          <ZRUButton size='3' color={ZRUColorE.indigo} className='!gap-2'>
-            <ZReceiptOutlineIcon className='w-5 h-5' /> Settle Up
-          </ZRUButton>
+          <ZSettleUpBtn />
         </ZRUFlex>
       </ZRUFlex>
 
-      <ZRUBox className='w-full px-1 mt-5'></ZRUBox>
+      <ZRUBox className='w-full px-1 mt-5'>
+        <ZAuthGroupUser />
+      </ZRUBox>
     </>
   );
 };

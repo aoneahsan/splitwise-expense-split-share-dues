@@ -13,7 +13,7 @@ import { Avatar } from '@radix-ui/themes';
 // #endregion
 
 // #region ---- Types Imports ----
-import { ZRURadiusE, type ZRUColorE } from '@/types/radixUI/index.type';
+import { ZRURadiusE, ZRUColorE } from '@/types/radixUI/index.type';
 import { Responsive } from '@radix-ui/themes/dist/cjs/props';
 interface ZRUAvatarI {
   className?: string;
@@ -33,7 +33,14 @@ interface ZRUAvatarI {
  * A customized Radix Avatar component.
  */
 const ZRUAvatar: React.FC<ZRUAvatarI> = (props) => {
-  return <Avatar {...props} variant={props?.variant ?? 'solid'} />;
+  return (
+    <Avatar
+      {...props}
+      variant={props?.variant ?? 'solid'}
+      radius={props?.radius ?? ZRURadiusE.full}
+      color={props?.color ?? ZRUColorE.gray}
+    />
+  );
 };
 
 export default ZRUAvatar;

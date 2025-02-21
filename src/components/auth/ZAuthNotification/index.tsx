@@ -10,7 +10,13 @@ import { IconType } from 'react-icons';
 
 // #region ---- Custom Imports ----
 import { ZClassNames } from '@/Packages/ClassNames';
-import { ZRUAvatar, ZRUBox, ZRUFlex, ZRUText } from '@/components/RadixUI';
+import {
+  ZRUAvatar,
+  ZRUBox,
+  ZRUButton,
+  ZRUFlex,
+  ZRUText
+} from '@/components/RadixUI';
 import {
   ZCommentDotsIcon,
   ZEllipsisVerticalIcon,
@@ -31,6 +37,7 @@ import {
   ZRURadiusE,
   ZRUTextAsE
 } from '@/types/radixUI/index.type';
+import { useZMediaQueryScale } from '@/hooks/helpers.hook';
 interface ZAuthNotificationI {
   showEllipsis?: boolean;
   ellipsisOnClick?: React.MouseEventHandler<SVGElement>;
@@ -55,6 +62,7 @@ const ZAuthNotification: React.FC<ZAuthNotificationI> = ({
   notificationType,
   ellipsisOnClick
 }) => {
+  const { isXsScale } = useZMediaQueryScale();
   // #region Functions
   const IconComponent: React.FC<{ className?: string }> = useCallback(
     (props) => {
@@ -108,9 +116,13 @@ const ZAuthNotification: React.FC<ZAuthNotificationI> = ({
     <ZRUFlex
       align={ZRUAlignE.center}
       justify={ZRUJustifyE.between}
-      className='px-4 py-3 rounded-md bg-medium/10'
+      className='px-4 py-3 rounded-md bg-medium/10 maxXs:flex-col maxXs:gap-y-3'
     >
-      <ZRUFlex align={ZRUAlignE.start} gap='3'>
+      <ZRUFlex
+        align={isXsScale ? ZRUAlignE.start : ZRUAlignE.center}
+        gap='3'
+        className='maxXs:flex-col maxXs:text-center'
+      >
         <ZRUBox className='relative'>
           <ZRUBox className='w-12 h-12 p-[2px] overflow-hidden border rounded-full border-secondary'>
             <ZRUFlex
@@ -168,10 +180,14 @@ const ZAuthNotification: React.FC<ZAuthNotificationI> = ({
         </ZRUBox>
       </ZRUFlex>
       {showEllipsis === true ? (
-        <ZEllipsisVerticalIcon
-          onClick={ellipsisOnClick}
-          className='w-5 h-5 transition-all cursor-pointer text-medium hover:text-secondary'
-        />
+        isXsScale ? (
+          <ZEllipsisVerticalIcon
+            onClick={ellipsisOnClick}
+            className='w-5 h-5 transition-all cursor-pointer text-medium hover:text-secondary'
+          />
+        ) : (
+          <ZRUButton className='w-full'>Actions</ZRUButton>
+        )
       ) : null}
     </ZRUFlex>
   );

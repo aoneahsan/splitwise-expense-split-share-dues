@@ -9,6 +9,10 @@ import { TextField } from '@radix-ui/themes';
 // #endregion
 
 // #region ---- Custom Imports ----
+import ZRUBox from '../../Layout/ZRUBox';
+import ZRUText from '../../Typography/ZRUText';
+import { isZNonEmptyString } from '@/utils/helpers';
+import { ZClassNames } from '@/Packages/ClassNames';
 
 // #endregion
 
@@ -19,10 +23,7 @@ import {
   ZRUColorE,
   type ZRURadiusE
 } from '@/types/radixUI/index.type';
-import ZRUBox from '../../Layout/ZRUBox';
-import ZRUText from '../../Typography/ZRUText';
-import { isZNonEmptyString } from '@/utils/helpers';
-import { ZColorEnum } from '@/utils/enums/elements.enum';
+
 interface ZRUInputI {
   children?: React.ReactNode;
   className?: string;
@@ -102,14 +103,16 @@ const ZRUInput: React.FC<ZRUInputI> = ({
         </ZRUText>
       ) : null}
       <TextField.Root
-        className={inputClassName}
+        className={ZClassNames(inputClassName, {
+          'bg-danger/20': !isValid
+        })}
         style={style}
         value={value}
         disabled={disabled}
         required={required}
         placeholder={placeholder}
         size={size}
-        color={color}
+        color={!isValid ? ZRUColorE.tomato : color}
         radius={radius}
         onChange={onChange}
         onBlur={onBlur}

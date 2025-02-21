@@ -6,3 +6,5 @@ export { default as ZSelect } from './ZSelect';
 export { default as ZTextarea } from './ZTextarea';
 export { default as ZUploadInput } from './ZUploadInput';
 export { default as ZCarousel } from './ZCarousel';
+export { default as ZPrizeInput } from './ZPrizeInput';
+export { default as ZScrollable } from './ZScrollable';
